@@ -10,5 +10,10 @@ router.get('/record', function(req, res, next) {
   res.render('record');
 });
 
+router.post("/upload", function(req, res, next) {
+  console.log("upload");
+  res.render('test');
+});
+
 
 module.exports = router;

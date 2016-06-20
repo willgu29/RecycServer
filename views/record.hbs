@@ -1,7 +1,7 @@
 <html>
     	<body>
     		<audio controls autoplay></audio>
-    		<script type="text/javascript" src="recorder.js"> </script>
+    		<script type="text/javascript" src="/javascripts/record.js"> </script>
                     <fieldset><legend>RECORD AUDIO</legend>
     		<input onclick="startRecording()" type="button" value="start recording" />
     		<input onclick="stopRecording()" type="button" value="stop recording and play" />
@@ -40,7 +40,14 @@
     				recorder.exportWAV(function(s) {
 
               audio.src = window.URL.createObjectURL(s);
-    				});
+
+              request.post('http://localhost:3000/upload',  form: {key:audio.src}}, function optionalCallback (err, httpResponse, body) {
+                if (err) {
+                  return console.error('upload failed:', err);
+                }
+                  console.log('Upload successful!  Server responded with:', body);
+                })
+    				  });
     			}
     		</script>
     	</body>
