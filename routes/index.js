@@ -10,6 +10,10 @@ router.get('/record', function(req, res, next) {
   res.render('record');
 });
 
+router.get('/upload', function(req, res, next) {
+  res.render('test');
+});
+
 router.post("/upload", function(req, res, next) {
   console.log("upload");
   res.render('test');
