@@ -14,17 +14,9 @@ router.post('/login',
   passport.authenticate('local'),
   function (req, res, next){
     if (req.user) {
-      res.status(200).json({
-        status: true,
-        user: req.user,
-        message: "Logged in!",
-      });
+      res.redirect("/");
     } else {
-      res.status(401).json({
-        status: false,
-        user: undefined,
-        message: "Invalid email or password",
-      });
+      res.send("incorrect email or password");
     }
   }
 );

@@ -1,0 +1,60 @@
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="description" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link href="/stylesheets/login.css" rel="stylesheet" type="text/css">
+
+    <title>RecYC</title>
+
+    <link rel="shortcut icon" type="image/png" href="/images/logo.svg">
+
+</head>
+
+
+<body>
+
+
+<!--
+  <div id="particles-js"></div>
+  <script src="particles.js"></script>
+  <script src="app.js"></script>
+-->
+
+   <div id = "header">
+       <img id = "logo" src="/images/logo.svg">
+       <h1>record</h1>
+    </div>
+
+    <form action="/auth/login" method="post">
+
+        <ul>
+
+            <li>
+                <input type="text" name="email" placeholder="email" maxlength="20"/>
+                <br/>
+            </li>
+
+            <li>
+                <input type="password" name="password" placeholder="password" maxlength="20"/>
+                <br/>
+            </li>
+
+        </ul>
+
+            <input id="submit" type="submit" name="signin" value="Sign In" />
+
+            <!-- The customer is redirected to the Sign Up page from where they can register to create a client user account. -->
+
+            <a id="signup" href="/createAccount">Don't have an account?<br/>Sign up here -></a>
+
+    </form>
+
+</body>
+
+</html>

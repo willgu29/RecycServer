@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get("/login", function(req, res, next) {
-  res.render('login');
+  res.render('login', {layout: false});
 });
 
 router.get("/createAccount", function(req, res, next) {

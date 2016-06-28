@@ -1,0 +1,158 @@
+@font-face {
+
+  font-family: 'Monique';
+  src:  url('/fonts/monique.otf') format('otf')
+}
+
+
+*{
+
+    font-family: 'Monique';
+    font-weight: 300;
+    z-index: 2;
+}
+
+body, html{
+
+    width: 100%;
+    height: 100%;
+    background-color: #EA5455;
+    padding: 0;
+    margin: 0;
+}
+
+#particles-js{
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+#header{
+
+    margin: auto;
+    text-align: center;
+    padding: 100px 0 70px 0;
+}
+
+#logo{
+
+    position: relative;
+    top: 6px;
+    width: 45px;
+    padding-right: 20px;
+
+    animation: blink 1s ease-in-out infinite alternate;
+}
+
+#header h1{
+    font-size: 70px;
+    letter-spacing: 0.3em;
+    color: #FFF;
+
+    display: inline;
+}
+
+form{
+
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+li{
+    margin: 0 auto;
+}
+
+input[type=text], input[type=password]{
+
+    width: 335px;
+    outline: none;
+    border: none;
+    background-color: #f78282;
+    font-size: 25px;
+    display: block;
+    color: #FFF;
+    box-shadow: none;
+    border-radius: 0.3em;
+    margin: 0 auto;
+    padding: 7px 0 10px 20px;
+    margin-bottom: 10px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+
+
+}
+
+#submit{
+
+    color: #EA5455;
+    background-color: #FFF;
+
+    width: 335px;
+    outline: none;
+    border: none;
+    display: block;
+    font-size: 20px;
+    padding: 10px 0;
+    margin: 0 auto 100px auto;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#signup{
+
+    color: #FFF;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+#error{
+
+    width: 100%;
+    background-color: #C82A2A;
+    font-size: 20px;
+    color: #FFF;
+    text-align: center;
+    padding: 10px 0px;
+    margin: 0;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+::-webkit-input-placeholder{
+    color: #FFF;
+    opacity: 0.9;
+}
+
+:-moz-placeholder{
+    color: #FFF;
+    opacity: 0.9;
+}
+
+::-moz-placeholder{
+    color: #FFF;
+    opacity: 0.9;
+}
+
+:-ms-input-placeholder{
+    color: #FFF;
+    opacity: 0.9;
+}
+
+@keyframes blink {
+
+    from {opacity: 1;}
+    to {opacity: 0.7;}
+}
