@@ -3,8 +3,29 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  if (req.user) {
+    res.render('index');
+  } else {
+    res.render('landing');
+  }
 });
+
+router.get("/login", function(req, res, next) {
+  res.render('login');
+});
+
+router.get("/createAccount", function(req, res, next) {
+  res.render('createAccount');
+});
+
+router.get("/joinSession", function(req, res, next) {
+  res.render('joinSession');
+});
+
+router.get("/createSession", function(req, res, next) {
+  res.render('createSession');
+});
+
 
 router.get('/record', function(req, res, next) {
   res.render('record');
