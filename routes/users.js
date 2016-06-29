@@ -16,21 +16,25 @@ router.get('/', function (req,res,next){
 
 //create account
 router.post('/', function (req, res, next) {
+
   var newUser = User();
+  newUser.firstName = req.body.firstName;
+  newUser.lastName = req.body.lastName;
   newUser.email     = req.body.email;
   newUser.password = hashUserPassword(req.body.password);
-  newUser.name      = req.body.name;
+  newUser.gender    = req.body.gender;
   newUser.age       = req.body.age;
   newUser.ethnicity = req.body.ethnicity;
-  newUser.gender    = req.body.gender;
 
   newUser.save(function (err, user) {
+      
     if (err) {
       res.status(401).json({
         status: false,
         user: undefined,
         message: err,
       });
+        
     } else {
       res.status(200).json({
         status:true,
@@ -39,8 +43,6 @@ router.post('/', function (req, res, next) {
       });
     }
 });
-
-
 
 });
 
