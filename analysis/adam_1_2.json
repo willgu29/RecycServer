@@ -1,9 +1,9 @@
 {
   "job": {
-    "lang": "en-US", 
-    "user_id": 3621, 
+    "lang": "en-US",
+     "user_id": 3621, 
     "name": "adam_1_1.wav", 
-    "duration": 462, 
+    "duration": 3, 
     "created_at": "Thu Jun 30 19:02:52 2016", 
     "id": 634462
   }, 
@@ -149,22 +149,16 @@
   ], 
   "words": [
     {
-      "duration": "0.001", 
+      "duration": "1.000", 
       "confidence": "0.995", 
       "name": "I", 
-      "time": "8.410"
+      "time": "0.500"
     },  
     {
-      "duration": "0.002", 
+      "duration": "1.250", 
       "confidence": 0.500, 
       "name": ".", 
-      "time": "456.880"
-    },
-    {
-      "duration": "0.003", 
-      "confidence": 0.040, 
-      "name": ".", 
-      "time": "456.880"
+      "time": "1.250"
     }
   ], 
   "format": "1.0"
