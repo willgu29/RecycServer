@@ -32,7 +32,7 @@ router.get('/record', function(req, res, next) {
 });
 
 router.get('/upload', function(req, res, next) {
-  res.render('test');
+  res.render("upload");
 });
 
 router.post("/upload", function(req, res, next) {
