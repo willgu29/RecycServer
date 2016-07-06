@@ -1,63 +1,84 @@
 var fs = require('fs'); //require the file system
-var obj = JSON.parse(fs.readFileSync('./adam_1_2.json', 'utf8')); //This is synch way of doing it
 
-/*  Async
-var obj;
-fs.readFile('file', 'utf8', function(err, data) {
-	if(err) throw err;
-	obj = JSON.parse(data);
-});
-*/
+var fileArr = ['./adam_1_2.json', './will_1_2.json', './tanuj_1_2.json'];
+var fileCont = [];
 
-//Read file JSON: http://bit.ly/29bSF9J
-
+for (var i=0;i<fileArr.length;i++) {
+	fileCont.push(JSON.parse(fs.readFileSync(fileArr[i], 'utf8')));  //Read file JSON: http://bit.ly/29bSF9J
+	//console.log(fileCont[i].job.name);
+}
 
 var words = obj.words;
+var words = [];
 
+fileCont.forEach(function(currVal, index, array) {
+	words[index] = currVal.words; 
+});
 
-var totalLength = parseFloat(obj.job.duration);
-var division = 1;
+//access people's words by words[personNumber]
+
+var numPeople = fileCont.length;
+var totalLength = parseFloat(fileCont[0].job.duration); //Grab length of leader's clip
+var division = 2;
 var partLen = totalLength/division;
-var part = {};
+
+var part = [];  //stores entire partitions for each person
+
+for (var i =0; i<numPeople; i++) {
+	part[i] = [];
+}
 
 //initialize part variable
-for (var i = 0; i<division;i++) {
-	part[parseInt(i)] = {
-		'duration' : 0,
-		'numWords' : 0,
-		'confSum' : 0,
-		'avgConf' : 0,
-		'wordConcat' : []
-	};
-}
+part.forEach(function(currVal, index, array) {
+	for (var i=0; i<division;i++) {
+		part[index][i] = {
+			'duration' : 0,
+			'numWords' : 0,
+			'confSum' : 0,
+			'avgConf' : 0,
+			'wordConcat' : []
+		}
+	}
+});
+//console.log(part.length);
+//access individual word partition by: part[personNumber][partitionNumber]
 
-for (word in words) { //iterate through each word
-	//determine position in partitionArr to add the data
-	var partNum = Math.floor(words[word].time/partLen);
+for (var numPerson = 0; numPerson<part.length; numPerson++) {
+	var indvWords = words[numPerson];
 
-	//obtain metadata about word
-	var wordDuration = parseFloat(words[word].duration);
-	var wordText = words[word].name;
-	var wordConf = parseFloat(words[word].confidence);
-	//throw out words with null confidence.
-	if (isNaN(wordConf)) {
-		continue;
+	for (word in indvWords) { //iterate through each word
+		console.log(numPerson + '   ' + word)
+		var indvWord = indvWords[word];
+		//console.log(indvWord);
+		//console.log(indvWord);
+		//determine position in partitionArr to add the data
+		var partNum = Math.floor(indvWord.time/partLen);
+		var indvPart = part[numPerson][partNum];
+
+		//obtain metadata about word
+		var wordDuration = parseFloat(indvWord.duration);
+		var wordText = indvWord.name;
+		var wordConf = parseFloat(indvWord.confidence);
+		//throw out words with null confidence.
+		if (isNaN(wordConf)) {
+			continue;
+		}
+		//console.log(indvPart);
+		//add individual word contribution to part
+		indvPart.duration += wordDuration;
+		indvPart.wordConcat.push(wordText);
+		indvPart.confSum += wordConf;
+		indvPart.numWords += 1;
 	}
 
-	//add individual word contribution to part
-	part[parseInt(partNum)].duration += wordDuration;
-	part[parseInt(partNum)].wordConcat.push(wordText);
-	part[parseInt(partNum)].confSum += wordConf;
-	part[parseInt(partNum)].numWords += 1;
+	//remove intermediate confidence summing
+	for (var i=0;i<division; i++) {
+		if (indvPart.numWords == 0)
+			continue;
+		//console.log(part[i].confSum);
+		indvPart.avgConf = part[i].confSum/part[i].numWords;
+		delete indvPart.confSum;
+	}
 }
 
-//remove intermediate confidence summing
-for (var i=0;i<division; i++) {
-	if (part[i].numWords == 0)
-		continue;
-	//console.log(part[i].confSum);
-	part[i].avgConf = part[i].confSum/part[i].numWords;
-	delete part[i].confSum;
-}
-
-console.log(part);
+//access part partition via part[personNum][partitionNum]
