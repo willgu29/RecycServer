@@ -18,6 +18,8 @@ router.post("/upload", function(req, res, next) {
   var url = ("https://api.speechmatics.com/v1.0/user/3621/jobs/?auth_token="+
     process.env.AUTH_TOKEN);
 
+    res.send("got it boss");
+
   request.post(url, json, function (error, response, body){
     if (!error && response.statusCode == 200) {
       console.log(body) // Show the HTML for the Google homepage.
