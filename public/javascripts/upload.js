@@ -6,7 +6,7 @@ function upload(audioFile) {
 
 
   $.ajax({
-      url: "localhost:3000/speechmatics/upload",
+      url: "https://recyc.herokuapp.com/speechmatics/upload",
       type: "POST",
       data: {"file" :audioFile.files[0]},
       processData: false,
