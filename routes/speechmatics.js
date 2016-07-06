@@ -7,7 +7,7 @@ var request = require('request');
 //speechmatics **/
 
 router.post("/upload", function(req, res, next) {
-  console.log(req.body.file);
+  console.log(req);
   var json = {
     "data_file"    : req.body.file,
     "model"        : "en-US,",
@@ -18,11 +18,12 @@ router.post("/upload", function(req, res, next) {
   var url = ("https://api.speechmatics.com/v1.0/user/3621/jobs/?auth_token="+
     process.env.AUTH_TOKEN);
 
-    res.send("got it boss");
-
   request.post(url, json, function (error, response, body){
     if (!error && response.statusCode == 200) {
       console.log(body) // Show the HTML for the Google homepage.
+      res.send(body);
+    } else {
+      console.log(error)
       res.send(body);
     }
   });
