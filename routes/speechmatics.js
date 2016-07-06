@@ -7,7 +7,7 @@ var request = require('request');
 //speechmatics **/
 
 router.post("/upload", function(req, res, next) {
-  console.log(req);
+  
   var json = {
     "data_file"    : req.body.file,
     "model"        : "en-US,",

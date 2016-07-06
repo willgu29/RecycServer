@@ -10,7 +10,7 @@ function upload(audioFile) {
       type: "POST",
       data: {"file" :audioFile.files[0]},
       processData: false,
-      contentType: false,
+      contentType: "multipart/form-data",
       success: function (res) {
         document.getElementById("response").innerHTML = res;
       }
