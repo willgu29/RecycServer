@@ -26,17 +26,17 @@ router.post('/', function (req, res, next) {
   newUser.age       = req.body.age;
   newUser.ethnicity = req.body.ethnicity;
 
-  newUser.save(function (err, user) {
+  newUser.save(function (err, newUser) {
       
     if (err) {
-      res.status(401).json({
+      res.status(400).json({
         status: false,
         user: undefined,
         message: err,
       });
         
     } else {
-      res.status(200).json({
+      res.status(201).json({
         status:true,
         user: newUser,
         message:"Account successfully created!",

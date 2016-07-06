@@ -26,7 +26,6 @@ router.get("/createSession", function(req, res, next) {
   res.render('createSession');
 });
 
-
 router.get('/record', function(req, res, next) {
   res.render('record');
 });
