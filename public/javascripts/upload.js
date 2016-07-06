@@ -7,7 +7,7 @@ function upload(audioFile) {
     "data_file"    : audioFile.files[0],
     "model"        : "en-US,",
     "notification" : "callback",
-    "callback"     : "localhost:3000/speechmatics/process"
+    "callback"     : "https://recyc.herokuapp.com/speechmatics/process"
   }
 
   $.ajax({
