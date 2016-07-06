@@ -3,17 +3,12 @@ function upload(audioFile) {
   console.log(audioFile.files[0]);
   alert("hello");
 
-  var json = {
-    "data_file"    : audioFile.files[0],
-    "model"        : "en-US,",
-    "notification" : "callback",
-    "callback"     : "https://recyc.herokuapp.com/speechmatics/process"
-  }
+
 
   $.ajax({
-      url: "https://api.speechmatics.com/v1.0/user/3621/jobs/?auth_token=MDBhM2Q3YWEtODI3OS00MDA1LWFjNzAtMjE0OGJjYWEzNjQ0",
+      url: "localhost:3000/speechmatics/upload",
       type: "POST",
-      data: json,
+      data: {"file" :audioFile.files[0]},
       processData: false,
       contentType: false,
       success: function (res) {
