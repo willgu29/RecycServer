@@ -14,8 +14,11 @@ router.post('/create', function (req,res,next){
     
     var newSession = Session();
     newSession.sessionName = req.body.sessionName;
-    newSession.leader = req.user.id;
     
+    var currentUserID = req.user.id;
+    
+    newSession.leader = currentUserID;
+    newSession.members.push(currentUserID);
 
     newSession.save(function (err, newSession){
       
@@ -31,7 +34,20 @@ router.post('/create', function (req,res,next){
             var newSessionID = SessionID();
             newSessionID.sessionID = newSession.id;
             newSessionID.code = generateCode();
-            res.send("You're all set");
+            
+            newSessionID.save(function (err){
+                
+                if (err) {
+                    res.status(400).json({
+                    status: false,
+                    session: undefined,
+                    message: err,
+                  });
+
+                } else {
+                    res.send("You're all set");
+                }
+            });
         }
     });
 });
@@ -40,6 +56,8 @@ router.post('/join', function (req,res,next){
 
     SessionID.findOne({ 'code': req.body.code }, 'sessionID', function (err, session){
       
+        //IF ALREADY MEMBER, THEN SHOW
+        
         if (err) {
           res.status(400).json({
             status: false,
@@ -48,12 +66,20 @@ router.post('/join', function (req,res,next){
           });
 
         } else {
+            
+            Session.findByIdAndUpdate(
+                session.sessionID, 
+                { $push: {members: req.user.id}},
+                {safe: true, upsert: true, new: true},
 
-            Session.findByIdAndUpdate( session.sessionID, { $push: {members: req.user.id}},{safe: true, upsert: true, new: true}, function(err, model) { console.log(err);}
-                                      );
+                function(err, model) { 
+                    console.log(err);
+                }
+            );
+            
+            res.send("You're all set");
         }
-    });
-    
+    }); 
 });
 
 module.exports = router;
