@@ -6,8 +6,6 @@ var request = require('request');
 
 //speechmatics **/
 
-"https://api.speechmatics.com/v1.0/user/3621/jobs/?auth_token=" + process.env.AUTH_TOKEN;
-
 router.post("/upload", function(req, res, next) {
   console.log(req.body.file);
   var json = {
@@ -15,7 +13,7 @@ router.post("/upload", function(req, res, next) {
     "model"        : "en-US,",
     "notification" : "callback",
     "callback"     : "https://recyc.herokuapp.com/speechmatics/process"
-  }
+  };
 
   var url = ("https://api.speechmatics.com/v1.0/user/3621/jobs/?auth_token="+
     process.env.AUTH_TOKEN);
