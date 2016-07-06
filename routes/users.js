@@ -18,7 +18,7 @@ router.get('/', function (req,res,next){
 router.post('/', function (req, res, next) {
   var newUser = User();
   newUser.email     = req.body.email;
-  newUser.password = hashUserPassword(req.body.password);
+  newUser.password  = hashUserPassword(req.body.password);
   newUser.name      = req.body.name;
   newUser.age       = req.body.age;
   newUser.ethnicity = req.body.ethnicity;

@@ -13,6 +13,7 @@ var session = require('express-session')
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
+var speechmatics = require("./routes/speechmatics");
 
 var app = express();
 
@@ -40,6 +41,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
+app.use("/speechmatics", speechmatics);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
