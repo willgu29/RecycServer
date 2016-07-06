@@ -34,6 +34,8 @@ router.post('/process', function(req, res, next) {
   //JSON transcript
   var data = req.files.get("data_file");
   console.log(data);
+  res.send(data);
+
 });
 
 router.get("/test", function(req, res, next) {
