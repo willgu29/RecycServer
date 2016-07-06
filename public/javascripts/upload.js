@@ -12,7 +12,7 @@ function upload(audioFile) {
       processData: false,
       contentType: "multipart/form-data",
       success: function (res) {
-        document.getElementById("response").innerHTML = res;
+        alert(res);
       }
   });
 
