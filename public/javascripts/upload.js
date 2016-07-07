@@ -1,23 +1,18 @@
-function upload(audioFile) {
+function upload() {
 
-  console.log(audioFile.files[0]);
-  alert("hello");
+  var audio = document.getElementById('audio');
 
-  var json = {
-    "data_file"    : audioFile.files[0],
-    "model"        : "en-US,",
-    "notification" : "callback",
-    "callback"     : "https://recyc.herokuapp.com/speechmatics/process"
-  }
+  alert(JSON.stringify(audio));
+  //MISSING DATA_FILE????
 
   $.ajax({
-      url: "https://api.speechmatics.com/v1.0/user/3621/jobs/?auth_token=MDBhM2Q3YWEtODI3OS00MDA1LWFjNzAtMjE0OGJjYWEzNjQ0",
+      url: "https://recyc.herokuapp.com/speechmatics/upload",
       type: "POST",
-      data: json,
+      data: {"file" : audio},
       processData: false,
-      contentType: false,
+      contentType: "multipart/form-data",
       success: function (res) {
-        document.getElementById("response").innerHTML = res;
+        alert(res);
       }
   });
 
