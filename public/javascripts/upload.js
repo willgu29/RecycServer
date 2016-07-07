@@ -1,6 +1,6 @@
 function upload() {
 
-  var audio = document.getElementById('audio').value;
+  var audio = document.getElementById('audio').src;
 
   alert(JSON.stringify(audio));
   //MISSING DATA_FILE????
