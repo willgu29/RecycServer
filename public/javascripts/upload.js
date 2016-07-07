@@ -1,9 +1,9 @@
-function upload(audioFile) {
+function upload() {
 
-  console.log(audioFile.files[0]);
-  alert("hello");
+  var audio = document.getElementById('audio').value;
 
-
+  alert(JSON.stringify(audio));
+  //MISSING DATA_FILE????
 
   $.ajax({
       url: "https://recyc.herokuapp.com/speechmatics/upload",
