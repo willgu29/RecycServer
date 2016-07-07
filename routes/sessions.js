@@ -69,8 +69,8 @@ router.post('/join', function (req,res,next){
             
             Session.findByIdAndUpdate(
                 session.sessionID, 
-                { $push: {members: req.user.id}},
-                {safe: true, upsert: true, new: true},
+                { $addToSet: {members: req.user.id}},
+                { safe: true, upsert: true, new: true},
 
                 function(err, model) { 
                     console.log(err);
