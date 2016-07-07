@@ -61,8 +61,24 @@
     // create WAV download link using audio data blob
     createDownloadLink();
 
+		uploadFile();
     recorder.clear();
   }
+
+	function uploadFile(file) {
+
+	  $.ajax({
+	      url: "https://recyc.herokuapp.com/speechmatics/upload",
+	      type: "POST",
+	      data: {"file" : file},
+	      processData: false,
+	      contentType: "multipart/form-data",
+	      success: function (res) {
+	        alert(res);
+	      }
+	  });
+
+	}
 
   function createDownloadLink() {
     recorder && recorder.exportWAV(function(blob) {
