@@ -1,0 +1,136 @@
+@font-face {
+    
+  font-family: 'Monique';
+  src:  url('/fonts/monique.otf') format('otf')
+}
+
+*{
+    
+    font-family: 'Monique';
+    font-weight: 300;
+}
+
+html, body{
+    
+	padding: 0;
+	margin: 0;
+	background-color: #FFF;
+    width: 100%;
+    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#header{
+    
+    font-size: 40px;
+    color: #FFF;
+    padding: 50px 0px 50px 60px;
+    background-color: #EA5455;
+    margin: 0;
+    font-kerning: none;
+}
+
+form{
+    
+    margin: 0;
+}
+
+ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+li{
+	border-bottom: 1px solid rgb(230, 230, 230);
+	padding: 40px 0;
+}
+
+form h1, label{
+	font-size: 35px;
+    color: #a7a7a7;
+    display: inline;
+    padding-left: 60px;
+}
+
+input[type=text], input[type=password]{
+    
+    padding-left: 60px;
+    left: 0;
+    outline: none;
+    border: none;
+    background-color: #FFF;
+    font-size: 35px;
+    color: #000;
+    display: inline;
+
+    -webkit-transition:color .25s ease-in;
+	-moz-transition:color .25s ease-in;
+	-o-transition:color .25s ease-in;
+	transition:color .25s ease-in;
+}
+
+.select-style{
+    display: inline;
+    padding-left: 40px;
+}
+
+.select-style select {
+    
+    padding: 5px 8px;
+    width: 70%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    background-color: #FFF;
+    font-size: 35px;
+    color: #000;
+}
+
+.select-style select:focus {
+    outline: none;
+    color: #000;
+}
+
+#submit{
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 40px;
+    color: #FFF;
+    padding: 50px 0px 50px 60px;
+    background-color: #790001;
+
+    -webkit-transition:background-color .1s ease-in;
+    -moz-transition:background-color .1s ease-in;
+    -o-transition:background-color .1s ease-in;
+    transition:background-color .1s ease-in;
+}
+
+#submit:hover{
+    background-color: rgba(121, 0, 1, 0.83);
+}
+
+#error{
+    
+    width: 100%;
+    background-color: #C82A2A;
+    font-size: 20px;
+    font-family: "Open Sans";
+    font-weight: 300;
+    color: #FFF;
+    text-align: center;
+    padding: 10px 0px;
+    margin: 0;
+    
+    top: 0px;
+    left: 0px;
+}
+    
