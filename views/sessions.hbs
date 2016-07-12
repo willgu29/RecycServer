@@ -1,28 +1,29 @@
-<div id="createSession">
+<div id="sessions">
 {{> nav}}
 
 <h1>Create Session</h1>
 
 <form action="/sessions/create" method="post">
-    
+
     <input id="sessionName" type="text" name="sessionName" maxlength="20"/>
     <input type="submit" id="submit" name="createSession" value="Create"/>
-    
+
 </form>
 
 
 	<table>
-		
+
 		{{#each sessions}}
-		
+
 		<tr>
-		
+
 			<td>{{sessionName}}</td>
+      <td><a href="/sessions/{{_id}}">{{_id}}</a></td>
 			<td>{{dateCreated}}</td>
 			<td>{{members}}</td>
 
 		</tr>
-		
+
 		{{/each}}
 
 	</table>

@@ -6,15 +6,25 @@ var User = require("../models/User.js");
 
 function generateCode(){
 
-    return Math.floor((Math.random() * 9999) + 1001);
+    return Math.floor((Math.random() * 99999) + 10001);
 }
 
 router.get("/", function (req, res, next) {
 
   //Finds all sessions this person has CREATED (not joined)
   Session.find({"leader" : req.user.id}, function (err, sessions) {
-    res.render("createSession");
+    res.render("sessions", {
+      "sessions" : sessions
+    });
   });
+});
+
+router.get("/:sessionID", function (req, res, next) {
+  Session.findOne({"_id" : req.params.sessionID}, function (err, session) {
+    res.render("analysis", {
+
+    });
+  })
 });
 
 router.post('/create', function (req,res,next){
@@ -63,7 +73,7 @@ router.post('/create', function (req,res,next){
                         function(err, model) {
                             console.log(err);
                         }
-                    );            
+                    );
                     res.render("newSession", {code : newSession.code});
                 }
             });
