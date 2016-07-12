@@ -1,4 +1,4 @@
-<div id="index">
+<div id="createSession">
 {{> nav}}
 
 <h1>Create Session</h1>
@@ -9,5 +9,22 @@
     <input type="submit" id="submit" name="createSession" value="Create"/>
     
 </form>
+
+
+	<table>
+		
+		{{#each sessions}}
+		
+		<tr>
+		
+			<td>{{sessionName}}</td>
+			<td>{{dateCreated}}</td>
+			<td>{{members}}</td>
+
+		</tr>
+		
+		{{/each}}
+
+	</table>
 
 </div>

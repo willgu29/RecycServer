@@ -1,7 +1,7 @@
 @font-face {
     
   font-family: 'Monique';
-  src:  url('/fonts/monique.otf') format('otf')
+  src: url('fonts/monique.otf') format('otf');
 }
 
 *{
