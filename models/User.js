@@ -1,13 +1,10 @@
-/**
- * Created by willgu 4/27/16
- */
-
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var salt = 'imsaltyaf7';
 var Crypto = require('crypto');
 
 var UserSchema = new Schema({
+    
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     dateCreated: { type: Date, default: Date.now},
@@ -16,7 +13,8 @@ var UserSchema = new Schema({
     age: Number,
     ethnicity: String,
     gender: String,
-    admin: {type: Boolean, default: false}
+    admin: {type: Boolean, default: false},
+    sessions: [{type: Schema.ObjectId, ref: 'Session'}]
 });
 
 UserSchema.methods.validPassword = function(password) {

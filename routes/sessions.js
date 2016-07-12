@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 var Session = require("../models/Session.js");
 var SessionID = require("../models/SessionID.js");
+var User = require("../models/User.js");
 
 function generateCode(){
     
     return Math.floor((Math.random() * 9999) + 1001);
-}
+}	   
 
 router.post('/create', function (req,res,next){
     
@@ -45,6 +46,17 @@ router.post('/create', function (req,res,next){
                   });
 
                 } else {
+                    
+                    User.findByIdAndUpdate(
+                        req.user.id, 
+                        { $addToSet: {sessions: req.user.id}},
+                        { safe: true, upsert: true, new: true},
+
+                        function(err, model) { 
+                            console.log(err);
+                        }
+                    );
+                    
                     res.send("You're all set");
                 }
             });
