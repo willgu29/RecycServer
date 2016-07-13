@@ -38,10 +38,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+//*******************INITIALIZE AWS*******************
+var awsS3 = require('./config/amazAWS');
+awsS3.pushToS3('doesthiswork?');
+
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
-app.use("/speechmatics", speechmatics);
+app.use('/speechmatics', speechmatics);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

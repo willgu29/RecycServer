@@ -1,4 +1,4 @@
-// AWS Module
+// AWS S3 Upload Module
 
 
 //***************Import Dependencies********************
@@ -17,12 +17,20 @@ AWS.config.update({
 var s3 = new AWS.S3({ endpoint :'https://s3-us-west-2.amazonaws.com' }),
     myBucket = 'mybucket43211234';
 
-var params = {Bucket: myBucket, Key: 'myUpload3', Body: "Test"};
 
-s3.putObject(params, function(err, data) {
-    if (err)  {
-        console.log(err) 
-    } else {
-        console.log("Successfully uploaded data to "+myBucket+"/testKeyUpload");
-    }
-});
+module.exports.pushToS3 = function(audioFile) {
+
+	//create 
+	var params = {Bucket: myBucket, Key: 'myUpload4', Body: audioFile};
+
+	s3.putObject(params, function(err, data) {
+	    if (err)  {
+	        console.log(err) 
+	    } else {
+	        console.log("Successfully uploaded data to "+myBucket+"/testKeyUpload");
+	    }
+	});
+
+}
+
+
