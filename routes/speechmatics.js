@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var request = require('request');
-var AWS = require('aws-sdk');
-AWS.config.region = 'us-west-2';
+var awsS3 = require('../config/amazAWS');
 
 
 
@@ -60,12 +59,16 @@ router.post('/process', function(req, res, next) {
 });
 
 router.get("/test", function(req, res, next) {
+  
+  awsS3.pushToS3('key6', 'testString'); //need to have a promise here.
+  awsS3.pullFromS3('key6');
+
   var url = ("https://api.speechmatics.com/v1.0/user/3621/jobs/?auth_token="+
     process.env.AUTH_TOKEN);
 
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      console.log(body) // Show the HTML for the Google homepage.
+      //console.log(body) // Show the HTML for the Google homepage.
       res.send(body);
     }
   });

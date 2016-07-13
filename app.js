@@ -39,8 +39,9 @@ app.use(passport.session());
 
 
 //*******************INITIALIZE AWS*******************
-var awsS3 = require('./config/amazAWS');
-awsS3.pushToS3('doesthiswork?');
+// var awsS3 = require('./config/amazAWS');
+// awsS3.pushToS3('key1', 'doesthisbodywork?');
+//awsS3.pullFromS3('key1');
 
 
 app.use('/', routes);
