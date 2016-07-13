@@ -1,0 +1,122 @@
+{
+  "job": {
+    "lang": "en-US", 
+    "user_id": 3621, 
+    "name": "tanuj_1_1.wav", 
+    "duration": 463, 
+    "created_at": "Thu Jun 30 19:05:24 2016", 
+    "id": 634477
+  }, 
+  "speakers": [
+    {
+      "duration": "14.410", 
+      "confidence": null, 
+      "name": "M1", 
+      "time": "18.540"
+    }, 
+    {
+      "duration": "14.180", 
+      "confidence": null, 
+      "name": "F2", 
+      "time": "32.950"
+    }, 
+    {
+      "duration": "5.830", 
+      "confidence": null, 
+      "name": "F5", 
+      "time": "47.130"
+    }, 
+    {
+      "duration": "19.490", 
+      "confidence": null, 
+      "name": "M1", 
+      "time": "52.960"
+    }, 
+    {
+      "duration": "13.800", 
+      "confidence": null, 
+      "name": "M2", 
+      "time": "72.450"
+    }, 
+    {
+      "duration": "13.520", 
+      "confidence": null, 
+      "name": "F2", 
+      "time": "86.250"
+    }, 
+    {
+      "duration": "79.170", 
+      "confidence": null, 
+      "name": "M2", 
+      "time": "99.770"
+    }, 
+    {
+      "duration": "20.250", 
+      "confidence": null, 
+      "name": "M3", 
+      "time": "178.940"
+    }, 
+    {
+      "duration": "65.600", 
+      "confidence": null, 
+      "name": "F2", 
+      "time": "199.190"
+    }, 
+    {
+      "duration": "6.860", 
+      "confidence": null, 
+      "name": "M2", 
+      "time": "264.790"
+    }, 
+    {
+      "duration": "16.210", 
+      "confidence": null, 
+      "name": "F2", 
+      "time": "271.650"
+    }, 
+    {
+      "duration": "18.950", 
+      "confidence": null, 
+      "name": "F3", 
+      "time": "287.860"
+    }, 
+    {
+      "duration": "17.730", 
+      "confidence": null, 
+      "name": "F4", 
+      "time": "306.810"
+    }, 
+    {
+      "duration": "124.280", 
+      "confidence": null, 
+      "name": "F3", 
+      "time": "324.540"
+    }, 
+    {
+      "duration": "13.170", 
+      "confidence": null, 
+      "name": "M5", 
+      "time": "448.820"
+    }
+  ], 
+  "words": [
+    {
+      "duration": "0.470", 
+      "confidence": "0.223", 
+      "name": "This", 
+      "time": "18.540"
+    }, 
+    {
+      "duration": "0.160", 
+      "confidence": "0.214", 
+      "name": "is", 
+      "time": "19.050"
+    }, 
+    {
+      "duration": "0.210", 
+      "confidence": "0.619", 
+      "name": "like", 
+      "time": "19.210"
+    } ], 
+  "format": "1.0"
+}
