@@ -1,12 +1,14 @@
 <div id="sessions">
 {{> nav}}
 
-<h1>Create Session</h1>
+<h1>Welcome to Recyc</h1>
 
-<form action="/sessions/create" method="post">
 
-    <input id="sessionName" type="text" name="sessionName" maxlength="20"/>
-    <input type="submit" id="submit" name="createSession" value="Create"/>
+
+<form action="/sessions/join" method="post">
+
+    <input id="code" type="text" name="code" placeholder="Enter meeting code" maxlength="4"/>
+    <input type="submit" id="submit" name="joinSession" value="Join"/>
 
 </form>
 

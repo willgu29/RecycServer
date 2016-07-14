@@ -1,0 +1,14 @@
+<div id="meeting">
+
+  {{id}}
+  <p>Show members in meeting, and record button, then stop button</p>
+
+
+  <form action="/sessions/end/{{id}}" method="post">
+
+      <input type="submit" id="submit" name="endMeeting" value="End Meeting"/>
+
+  </form>
+
+
+</div>
