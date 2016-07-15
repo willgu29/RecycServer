@@ -14,6 +14,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 var speechmatics = require("./routes/speechmatics");
+var amazonAWS = require('./routes/amazon');
 
 var app = express();
 
@@ -48,45 +49,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/speechmatics', speechmatics);
-
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
-var AWS_PRIVATE_KEY = process.env.AWS_SECRET_ACCESS_KEY;
-var S3_BUCKET = process.env.S3_BUCKET;
-var aws = require('aws-sdk');
-
-app.get('/sign_s3', function(req, res) {
-  console.log("query: ",req.query.file_name, req.query.file_type);
-  aws.config.update({
-    accessKeyId: AWS_ACCESS_KEY,
-    secretAccessKey : AWS_PRIVATE_KEY,
-    region: 'us-west-2'
-  });
-  var s3 = new aws.S3();
-  //var s3 = new aws.S3({ endpoint :'https://s3-us-west-2.amazonaws.com' });
-  var urlKey = '/'+req.query.file_name; //TODO
-  var s3_params = {
-    Bucket: S3_BUCKET,
-    Key: urlKey,
-    Expires: 60,
-    ContentType: req.query.file_type,
-    ACL: 'public-read'
-  };
-  console.log('doesthiswork??');
-  s3.getSignedUrl('putObject', s3_params, function(err, data) {
-    if(err) {
-      console.log('hi');
-      console.log(err);
-    } else {
-      console.log("PUT OBJECT");
-      var return_data = {
-        signed_request : data,
-        url : 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+req.query.file_name
-      };
-      res.write(JSON.stringify(return_data));
-      res.end();
-    }
-  });
-});
+app.use('/aws', amazonAWS);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
