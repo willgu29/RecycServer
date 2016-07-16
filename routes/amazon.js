@@ -55,7 +55,7 @@ router.get('/sign_s3', function(req, res) {
   var putURL;
   var s3Params_GET = {
   Bucket: S3_BUCKET,
-  Key: 'test1',
+  Key: 'key1',
   //ContentType: req.query.file_type,
   //ACL: 'public-read'
   };
@@ -74,10 +74,10 @@ router.get('/sign_s3', function(req, res) {
 
   //***********Establish AWS S3 PUT request*************************
     var s3Params_PUT = {
+    ACL: 'public-read',
     Bucket: S3_BUCKET,
-    Key: 'test1',
-    //ContentType: req.query.file_type,
-    ACL: 'public-read'
+    Key: 'key1',
+    ContentType: req.query.file_type,
   };
 
   s3.getSignedUrl('putObject', s3Params_PUT, function(err, url) {
