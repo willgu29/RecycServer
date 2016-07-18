@@ -8,16 +8,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session')
-
+var socketio = require('socket.io');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 var speechmatics = require("./routes/speechmatics");
 var amazonAWS = require('./routes/amazon');
+var sessions = require('./routes/sessions');
 
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

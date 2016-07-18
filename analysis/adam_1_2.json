@@ -1,0 +1,170 @@
+{
+  "job": {
+    "lang": "en-US", 
+    "user_id": 3621, 
+    "name": "adam_1_1.wav", 
+    "duration": 462, 
+    "created_at": "Thu Jun 30 19:02:52 2016", 
+    "id": 634462
+  }, 
+  "speakers": [
+    {
+      "duration": "3.950", 
+      "confidence": null, 
+      "name": "M7", 
+      "time": "8.410"
+    }, 
+    {
+      "duration": "1.120", 
+      "confidence": null, 
+      "name": "M4", 
+      "time": "12.360"
+    }, 
+    {
+      "duration": "1.830", 
+      "confidence": null, 
+      "name": "M7", 
+      "time": "13.480"
+    }, 
+    {
+      "duration": "15.240", 
+      "confidence": null, 
+      "name": "F2", 
+      "time": "15.310"
+    }, 
+    {
+      "duration": "7.110", 
+      "confidence": null, 
+      "name": "M12", 
+      "time": "30.550"
+    }, 
+    {
+      "duration": "7.510", 
+      "confidence": null, 
+      "name": "M14", 
+      "time": "37.660"
+    }, 
+    {
+      "duration": "22.880", 
+      "confidence": null, 
+      "name": "M7", 
+      "time": "45.170"
+    }, 
+    {
+      "duration": "1.850", 
+      "confidence": null, 
+      "name": "M3", 
+      "time": "68.050"
+    }, 
+    {
+      "duration": "6.260", 
+      "confidence": null, 
+      "name": "F2", 
+      "time": "69.900"
+    }, 
+    {
+      "duration": "25.400", 
+      "confidence": null, 
+      "name": "M4", 
+      "time": "76.160"
+    }, 
+    {
+      "duration": "13.260", 
+      "confidence": null, 
+      "name": "M1", 
+      "time": "101.560"
+    }, 
+    {
+      "duration": "5.270", 
+      "confidence": null, 
+      "name": "M7", 
+      "time": "114.820"
+    }, 
+    {
+      "duration": "14.070", 
+      "confidence": null, 
+      "name": "F3", 
+      "time": "120.090"
+    }, 
+    {
+      "duration": "27.200", 
+      "confidence": null, 
+      "name": "M8", 
+      "time": "134.160"
+    }, 
+    {
+      "duration": "19.690", 
+      "confidence": null, 
+      "name": "M7", 
+      "time": "161.360"
+    }, 
+    {
+      "duration": "9.050", 
+      "confidence": null, 
+      "name": "F3", 
+      "time": "181.050"
+    }, 
+    {
+      "duration": "43.920", 
+      "confidence": null, 
+      "name": "M7", 
+      "time": "190.100"
+    }, 
+    {
+      "duration": "6.050", 
+      "confidence": null, 
+      "name": "M9", 
+      "time": "234.020"
+    }, 
+    {
+      "duration": "87.740", 
+      "confidence": null, 
+      "name": "M10", 
+      "time": "240.070"
+    }, 
+    {
+      "duration": "29.020", 
+      "confidence": null, 
+      "name": "M7", 
+      "time": "327.810"
+    }, 
+    {
+      "duration": "37.810", 
+      "confidence": null, 
+      "name": "M13", 
+      "time": "356.830"
+    }, 
+    {
+      "duration": "54.620", 
+      "confidence": null, 
+      "name": "M11", 
+      "time": "394.640"
+    }, 
+    {
+      "duration": "7.620", 
+      "confidence": null, 
+      "name": "M15", 
+      "time": "449.260"
+    }
+  ], 
+  "words": [
+    {
+      "duration": "0.170", 
+      "confidence": "0.995", 
+      "name": "I", 
+      "time": "8.410"
+    }, 
+    {
+      "duration": "0.360", 
+      "confidence": "0.989", 
+      "name": "did", 
+      "time": "8.580"
+    }, 
+    {
+      "duration": "0.300", 
+      "confidence": "0.993", 
+      "name": "sorry", 
+      "time": "8.940"
+    } ], 
+  "format": "1.0"
+}

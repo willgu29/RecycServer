@@ -1,0 +1,33 @@
+<div id="sessions">
+{{> nav}}
+
+<h1>Welcome to Recyc</h1>
+
+
+
+<form action="/sessions/join" method="post">
+
+    <input id="code" type="text" name="code" placeholder="Enter meeting code" maxlength="4"/>
+    <input type="submit" id="submit" name="joinSession" value="Join"/>
+
+</form>
+
+
+	<table>
+
+		{{#each sessions}}
+
+		<tr>
+
+			<td>{{sessionName}}</td>
+      <td><a href="/sessions/{{_id}}">{{_id}}</a></td>
+			<td>{{dateCreated}}</td>
+			<td>{{members}}</td>
+
+		</tr>
+
+		{{/each}}
+
+	</table>
+
+</div>

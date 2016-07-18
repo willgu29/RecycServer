@@ -1,26 +1,140 @@
-<div id="createAccount">
+<html>
 
-<form action="/users" method="post">
+    <head>
 
-    <ul>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <li>
-            <input type="text" name="email" placeholder="email" maxlength="20"/>
-            <br/>
-        </li>
+        <meta name="description" content="">
 
-        <li>
-            <input type="password" name="password" placeholder="password" maxlength="20"/>
-            <br/>
-        </li>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    </ul>
+        <link href="stylesheets/createAccount.css" rel="stylesheet" type="text/css">
 
-        <input id="submit" type="submit" name="createaccount" value="Create Account" />
+        <title>RecYC | Signup</title>
 
-        <!-- The customer is redirected to the Sign Up page from where they can register to create a client user account. -->
+        <link rel="shortcut icon" type="image/png" href="/images/logo.svg">
+
+    </head>
+
+<body>
+    
+    <div id = "createAccount">
+
+        <h2 id = "header">
+
+          Improve your meetings. It's just one step away.
+
+        </h2>
+
+        <form action="/users" method="post">
+
+          <ul>
+
+            <li><h1>First Name:</h1><input id="firstName" type="text" name="firstName" maxlength="20" onfocus="textfocus(this)" onblur="lengthCheck(this, 2)"/><br/></li>
+
+            <li><h1>Last Name:</h1><input id="lastName" type="text" name="lastName" maxlength="20" onfocus="textfocus(this)" onblur="lengthCheck(this, 2)"/><br/></li>
+
+            <li><h1>Email:</h1><input id="email" type="text" name="email"  maxlength="20" onfocus="textfocus(this)" onblur="lengthCheck(this, 6)"/></li>
 
 
-</form>
+            <li><h1>Password:</h1><input id="password" type="password" name="password" maxlength="20" onfocus="textfocus(this)" onblur="lengthCheck(this, 6)"/><br/></li>
 
-</div>
+            <li><h1>Gender:</h1>
+
+                <div class="select-style">
+
+                <select name="gender">
+
+                  <option value="">-</option>
+                  <option value="m">Male</option>
+                  <option value="f">Female</option>
+
+                </select>
+              </div>
+
+            </li>
+
+            <li><h1>Age:</h1><input id="age" type="text" name="age" maxlength="2" onfocus="textfocus(this)" onblur="lengthCheck(this, 1)" onkeypress="return isNumber(event)"/><br/></li>
+
+
+            <li><h1>Ethnicity:</h1>
+
+                <div class="select-style">
+
+                <select name="ethnicity">
+
+                  <option value="">-</option>
+                  <option>Mixed Race</option>
+                  <option>Arctic (Siberian, Eskimo)</option>
+                  <option>Caucasian (European)</option>
+                  <option>Caucasian (Indian)</option>
+                  <option>Caucasian (Middle East)</option>
+                  <option>Caucasian (North African, Other)</option>
+                  <option>Indigenous Australian</option>
+                  <option>Native American</option>
+                  <option>North East Asian (Mongol, Tibetan, Korean Japanese, etc)</option>
+                  <option>Pacific (Polynesian, Micronesian, etc)</option>
+                  <option>South East Asian (Chinese, Thai, Malay, Filipino, etc)</option>
+                  <option>West African, Bushmen, Ethiopian</option>
+                  <option>Other</option>
+
+                </select>
+              </div>
+
+            </li>
+
+            <input type="submit" id="submit" name="createaccount" value="Create Account"/>
+
+          </ul>
+
+
+        </form>
+
+    </div>
+
+
+    <script type="text/javascript">
+
+        function textfocus(x){
+
+        if(x.value =="" || x.value ==0)
+          x.style.color = '#000';
+
+            x.style.color = '#000';
+        }
+
+        function lengthCheck(inputbox, minlength){
+
+
+            var input = inputbox.value;
+
+            if (input.length >= minlength){
+
+                inputbox.style.color = "#33de00";
+            }
+
+            else{
+                inputbox.style.color = "#EA5455";
+            }
+
+            if(input.length == 0)
+              inputbox.style.color = "#FFF";
+        }
+
+        function isNumber(evt){
+
+            evt = (evt) ? evt : window.event;
+
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+            else return true;
+        }
+
+    </script>
+
+</body>
+
+</html>

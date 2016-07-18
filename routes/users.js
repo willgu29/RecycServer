@@ -16,31 +16,33 @@ router.get('/', function (req,res,next){
 
 //create account
 router.post('/', function (req, res, next) {
+
   var newUser = User();
+  newUser.firstName = req.body.firstName;
+  newUser.lastName = req.body.lastName;
   newUser.email     = req.body.email;
-  newUser.password  = hashUserPassword(req.body.password);
-  newUser.name      = req.body.name;
+  newUser.password = hashUserPassword(req.body.password);
+  newUser.gender    = req.body.gender;
   newUser.age       = req.body.age;
   newUser.ethnicity = req.body.ethnicity;
-  newUser.gender    = req.body.gender;
 
-  newUser.save(function (err, user) {
+  newUser.save(function (err, newUser) {
+      
     if (err) {
-      res.status(401).json({
+      res.status(400).json({
         status: false,
         user: undefined,
         message: err,
       });
+        
     } else {
-      res.status(200).json({
+      res.status(201).json({
         status:true,
         user: newUser,
         message:"Account successfully created!",
       });
     }
 });
-
-
 
 });
 

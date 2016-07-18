@@ -1,0 +1,15 @@
+<div id="newSession">
+
+  <h1>Code: {{code}}</h1>
+
+   Give this to your colleagues to join the meeting through Recyc. And click
+   the button below when you're ready to start the meeting.
+
+   <form action="/sessions/start/{{code}}" method="post">
+
+       <input type="submit" id="submit" name="Start Meeting" value="Start Meeting"/>
+
+   </form>
+
+
+</div>
