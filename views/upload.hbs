@@ -14,7 +14,7 @@
     	//Script to send audio file to AWS when file is loaded.
 
 	    //executes when input audio changes 
-    	document.getElementById("audio").onchange=function() {
+        document.getElementById("audio").onchange=function() {
     		var files = document.getElementById("audio").files;
     		var file = files[0];
     		if(file == null) {
@@ -26,23 +26,21 @@
     	};
 
     	var getSignedRequest = function(file) {
-            //Gets a signed GET Request
-            console.log('getSignedRequestInit');
-    		const xhr = new XMLHttpRequest();
+    		var xhr = new XMLHttpRequest();
     		xhr.open("GET", "/aws/sign_s3?file_name=" + file.name + "&file_type=" + file.type); //opens a get request with given params
-            console.log('xhrOnreadyStateInit');
+
     		xhr.onreadystatechange = function() {
     			//fires callback when state changes
-    			console.log('OnReadyStateChange');
+    			console.log('hi');
                 console.log(xhr.readyState, xhr.status);
     			if(xhr.readyState === 4) {
-    				//XHR done receiving header/body content
+    				//Done
     				if(xhr.status === 200) {
-    					//XHR HTML Status 200 : No errors
-    					const response = JSON.parse(xhr.responseText);
+    					//All Good to upload file.
+    					var response = JSON.parse(xhr.responseText);
     					console.log("Upload file");
                         console.log('response is: ' + response.signed_request);
-    					uploadFile(file, response.signedRequest, response.url);
+    					uploadFile(file, response.signed_request);
     				}
     				else {
     					//status is not 200, so couldn't get signed url from backend
@@ -53,34 +51,17 @@
 			xhr.send();
     	};
 
-    	var uploadFile = function(file, signedRequest, url) {
-            //takes a signed PUT request, uploads file
-    		console.log('uploadFileInit');
-            const xhr = new XMLHttpRequest();
-            //console.log(signed_put_URL);
-    		xhr.open("PUT", signedRequest);
-
-            xhr.onreadystatechange = function() {
-                if(xhr.readyState === 4) {
-                    if(xhr.status === 200) {
-                        console.log('Ready to Upload');
-                    }
-                } else {
-                    alert('Could not upload file.');
-                }
-            };
-            xhr.send(file);
-
-
-
-
-    		// //sets access control level for AWS
-    		// xhr.setRequestHeader('x-amz-acl', 'public-read');
-    		// xhr.onerror = function() {
-    		// 	alert("Couldn't upload file");
-    		// }
-    		// console.log("Sending File : ", file);
-    		// xhr.send(file);
+    	var uploadFile = function(file, signed_request) {
+    		var xhr = new XMLHttpRequest();
+            console.log(signed_request);
+    		xhr.open("PUT", signed_request);
+    		//sets access control level for AWS
+    		xhr.setRequestHeader('x-amz-acl', 'public-read');
+    		xhr.onerror = function() {
+    			alert("Couldn't upload file");
+    		}
+    		console.log("Sending File : ", file);
+    		xhr.send(file);
     	};
     </script>
 
