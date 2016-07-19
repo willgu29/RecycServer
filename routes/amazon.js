@@ -12,7 +12,7 @@ console.log('s3 bucket is: ' + S3_BUCKET);
 
 //***********************Routes************************
 router.get('/sign_s3', function(req, res) {
-  
+
     //**********AWS Config***********
   aws.config.update({
     accessKeyId: AWS_ACCESS_KEY,
@@ -48,8 +48,8 @@ router.get('/sign_s3', function(req, res) {
     console.log('Signed Request is: ' + returnData.signedRequest);
     console.log('url is: ' + returnData.url);
 
-    res.write(JSON.stringify(returnData));
-    res.end();
+    res.send(JSON.stringify(returnData));
+    
   });
 });
 
