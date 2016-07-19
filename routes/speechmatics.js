@@ -2,32 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 var request = require('request');
-var awsS3 = require('../config/amazAWS');
 
-
-
-router.get("/testupload", function(req,res, next) {
-  console.log('haii');
-  var s3bucket = new AWS.S3({
-  params: {Bucket: 'myBucket'}});
-  s3bucket.createBucket(function() {
-    var params = {Key: 'myKey', Body: 'Hello!'};
-    s3bucket.upload(params, function(err, data) {
-      if(err) {
-        console.log("error uploading data: ", err);
-      } else {
-        console.log("Successfully uploaded data to myBucket/myKey");
-      }
-    });
-  });
-});
 
 //speechmatics **/
 
 router.post("/upload", function(req, res, next) {
-  
+
   var json = {
-    "data_file"    : req.body.file,
+    "data_file"    : req.body.data_file,
     "model"        : "en-US,",
     "notification" : "callback",
     "callback"     : "https://recyc.herokuapp.com/speechmatics/process"
@@ -35,7 +17,6 @@ router.post("/upload", function(req, res, next) {
 
   var url = ("https://api.speechmatics.com/v1.0/user/3621/jobs/?auth_token="+
     process.env.AUTH_TOKEN);
-
 
   request.post(url, json, function (error, response, body){
     if (!error && response.statusCode == 200) {
@@ -59,16 +40,12 @@ router.post('/process', function(req, res, next) {
 });
 
 router.get("/test", function(req, res, next) {
-  
-  awsS3.pushToS3('key6', 'testString'); //need to have a promise here.
-  awsS3.pullFromS3('key6');
-
   var url = ("https://api.speechmatics.com/v1.0/user/3621/jobs/?auth_token="+
     process.env.AUTH_TOKEN);
 
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      //console.log(body) // Show the HTML for the Google homepage.
+      console.log(body) // Show the HTML for the Google homepage.
       res.send(body);
     }
   });

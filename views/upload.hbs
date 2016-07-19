@@ -65,7 +65,7 @@
        $.ajax({
            url: "https://recyc.herokuapp.com/speechmatics/upload",
            type: "POST",
-           data: {"file" : url},
+           data: {"data_file" : url},
            processData: false,
            contentType: "multipart/form-data",
            success: function (res) {

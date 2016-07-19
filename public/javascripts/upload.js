@@ -2,6 +2,8 @@ function upload() {
 
   // var audio = document.getElementById('audio');
 
+  alert("Upload successful");
+
   // alert(JSON.stringify(audio));
   //MISSING DATA_FILE????
 
