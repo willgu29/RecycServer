@@ -15,6 +15,9 @@ html{
 
 	width: 100%;
 	height: 100%;
+	
+    padding: 0;
+    margin: 0;
 }
 
 
@@ -23,7 +26,7 @@ body {
 	width: auto;
 	height: auto;
 	
-	background-color: #613f7e;
+	background-color: #8154a8;
 	color: #fff;
 
 	border: 10px solid white;
@@ -39,14 +42,14 @@ body {
   	-ms-user-select: none;      /* IE 10+ */
   	user-select: none;          /* Likely future */ 
 
-    margin: auto;
-    text-align: center;
-    padding: 100px 0 70px 0;
+    padding: 50px 0 50px 70px;
 	
 	background-color: #613f7e;
 }
 
 #logo{
+	
+	display: inline-block;
 
     position: relative;
     top: 6px;
@@ -58,6 +61,8 @@ body {
 
 #header h1{
 	
+	display: inline-block;
+	
     font-size: 40px;
     letter-spacing: 0.3em;
     color: #FFF;
@@ -67,14 +72,44 @@ body {
 	cursor: default;
 }
 
+
+#nav {
+	
+	display: inline-block;
+}
+
+
 #title {
 	
+	width: 85%;
+	margin: 0 auto;
+	
+}
+
+
+#title h1{
+	
+	display: inline-block;
+	float: left;
 	font-size: 50px;
     letter-spacing: 0.3em;
     color: #FFF;
+	margin: 0;
+	
+	padding: 40px 0;
 	
 	cursor: default;
 }
+
+
+#title button {
+	
+	margin-top: 70px;
+	display: inline-block;
+	
+	float: right;
+}
+
  
 #table-container {
 	
@@ -107,6 +142,7 @@ th {
 
 tr {
 	
+	cursor: pointer;
 	background-color: #fff;
 }
 

@@ -27,14 +27,23 @@
        
     </div>
 
-	<h1 id="title">sessions</h1>
 
+	<div id="title">
+
+		<h1>meetings</h1>
+		<button>create</button>
+		<button>join</button>
+		
+	</div>
+
+<!--
 	<form action="/sessions/join" method="post">
 
 		<input id="code" type="text" name="code" placeholder="Enter meeting code" maxlength="4"/>
 		<input type="submit" id="submit" name="joinSession" value="Join"/>
 
 	</form>
+-->
 
 
 <div id="table-container">
@@ -51,7 +60,7 @@
 
 		{{#each sessions}}
 		
-			<tr onclick="location.href = '';">
+			<tr onclick="location.href = '/sessions/{{_id}}';">
 
 				<td class="sessionName">{{sessionName}}</td>
 				<td>{{dateCreated}}</td>

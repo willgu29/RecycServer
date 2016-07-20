@@ -15,7 +15,7 @@ router.get("/login", function(req, res, next) {
 });
 
 router.get("/createAccount", function(req, res, next) {
-  res.render('createAccount');
+  res.render('createAccount', {layout: false});
 });
 
 router.get("/about", function(req, res, next) {
@@ -40,6 +40,10 @@ router.get('/record', function(req, res, next) {
 
 router.get('/upload', function(req, res, next) {
   res.render("upload");
+});
+
+router.get('/upload_json', function(req, res, next) {
+  res.render("upload_json");
 });
 
 router.post("/upload", function(req, res, next) {
