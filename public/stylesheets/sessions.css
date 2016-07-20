@@ -15,9 +15,6 @@ html{
 
 	width: 100%;
 	height: 100%;
-	
-    padding: 0;
-    margin: 0;
 }
 
 
@@ -31,7 +28,6 @@ body {
 
 	border: 10px solid white;
 	
-	padding: 0;
 	margin: 0;
 }
 
@@ -41,14 +37,16 @@ body {
   	-moz-user-select: none;     /* Firefox all */
   	-ms-user-select: none;      /* IE 10+ */
   	user-select: none;          /* Likely future */ 
-
-    padding: 50px 0 50px 70px;
 	
 	background-color: #613f7e;
+	
+	width: 90%;
+	margin: 50px auto;
 }
 
 #logo{
 	
+	float: left;
 	display: inline-block;
 
     position: relative;
@@ -61,6 +59,8 @@ body {
 
 #header h1{
 	
+	float: left;
+	
 	display: inline-block;
 	
     font-size: 40px;
@@ -72,11 +72,21 @@ body {
 	cursor: default;
 }
 
+#start, #join {
+	
+/*	margin-top: 70px;*/
+	display: inline-block;
+	
+	float: right;
+}
 
+
+/*
 #nav {
 	
 	display: inline-block;
 }
+*/
 
 
 #title {
@@ -99,15 +109,6 @@ body {
 	padding: 40px 0;
 	
 	cursor: default;
-}
-
-
-#title button {
-	
-	margin-top: 70px;
-	display: inline-block;
-	
-	float: right;
 }
 
  
@@ -146,7 +147,7 @@ tr {
 	background-color: #fff;
 }
 
-tr:hover {
+tr:not(:first-child):hover {
 	
 	opacity: 0.8;
 }
