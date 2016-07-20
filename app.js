@@ -43,6 +43,7 @@ app.use('/users', users);
 app.use('/auth', auth);
 app.use('/speechmatics', speechmatics);
 app.use('/aws', amazonAWS);
+app.use("/sessions", sessions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
