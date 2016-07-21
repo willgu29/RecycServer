@@ -7,9 +7,9 @@ var request = require('request');
 //speechmatics **/
 
 router.post("/upload", function(req, res, next) {
-  
+
   var json = {
-    "data_file"    : req.body.file,
+    "data_file"    : req.body.data_file,
     "model"        : "en-US,",
     "notification" : "callback",
     "callback"     : "https://recyc.herokuapp.com/speechmatics/process"
