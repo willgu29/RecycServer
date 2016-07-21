@@ -12,13 +12,6 @@ function generateCode(){
 router.get("/", function (req, res, next) {
 
   //Finds all sessions this person has CREATED (not joined)
-
-  Session.find({"members" : req.user.id}, function (err, sessions) {
-    res.render("sessions", { layout: false, 
-      "sessions" : sessions
-    });
-  });
-    
   Session
     .find({"members" : req.user.id})
     .populate("members", 'firstName lastName -_id')
