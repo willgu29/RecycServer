@@ -1,11 +1,11 @@
 //var analysis = {
-//	
+//
 //	function wordspace = function (recordingsData) {
-//	
+//
 //	};
 //
 //	function length = function (recordingsData) {
-//		
+//
 //	};
 //}
 
@@ -14,7 +14,7 @@ var wordSpace = function (recordingsData){
 	var fs = require('fs'); //require the file system
 
 	var fileArr = recordingsData; //['./adam_1_2.json', './will_1_2.json', './tanuj_1_2.json'];
-	
+
 	var fileCont = [];
 
 	for (var i=0;i<fileArr.length;i++) {
@@ -26,7 +26,7 @@ var wordSpace = function (recordingsData){
 	var words = [];
 
 	fileCont.forEach(function(currVal, index, array) {
-		words[index] = currVal.words; 
+		words[index] = currVal.words;
 	});
 
 	//access people's words by words[personNumber]
@@ -94,11 +94,11 @@ var wordSpace = function (recordingsData){
 			delete indvPart.confSum;
 		}
 	}
-	
-	
+
+
 	//access part partition via part[personNum][partitionNum]
 	return part;
-	
+
 }
 
 module.exports = wordSpace;
