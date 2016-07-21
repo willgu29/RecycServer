@@ -1,13 +1,39 @@
-<div id="index">
-{{> nav}}
+<html>
 
-<h1>Join Session</h1>
+<head>
 
-<form action="/sessions/join" method="post">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="description" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link href="/stylesheets/iframe.css" rel="stylesheet" type="text/css">
+
+    <title>Record | Join</title>
+
+    <link rel="shortcut icon" type="image/png" href="/images/logo.svg">
+
+</head>
+
+
+<body>
+	
+	<div id = "header">
+      
+        <img id = "logo" src="/images/logo.svg" onclick="window.location='/sessions';"/>
+        <h1><span id="home" onclick="window.location='/sessions';">record</span><span id="page"> // join</span></h1>
+       
+    </div>
+
+    <form action="/sessions/join" method="post">
+
+        <h1>Meeting Code:</h1><input id="code" type="text" name="code" maxlength="5" autocomplete="off" placeholder="eg.12345"/>
+        
+        <input type="submit" id="submit" name="joinSession" value="Join"/>
+
+    </form>
+
+</body>
     
-    <input id="code" type="text" name="code" maxlength="4"/>
-    <input type="submit" id="submit" name="joinSession" value="Join"/>
-    
-</form>
-
-</div>
+</html>

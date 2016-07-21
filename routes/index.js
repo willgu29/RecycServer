@@ -15,7 +15,7 @@ router.get("/login", function(req, res, next) {
 });
 
 router.get("/createAccount", function(req, res, next) {
-  res.render('createAccount');
+  res.render('createAccount', {layout: false});
 });
 
 router.get("/about", function(req, res, next) {
@@ -27,11 +27,11 @@ router.get('/meeting/:sessionID', function (req, res, next) {
 });
 
 router.get("/joinSession", function(req, res, next) {
-  res.render('joinSession');
+  res.render('joinSession', {layout: false});
 });
 
 router.get("/createSession", function(req, res, next) {
-  res.render('createSession');
+  res.render('createSession', {layout: false});
 });
 
 router.get('/record', function(req, res, next) {
@@ -40,6 +40,10 @@ router.get('/record', function(req, res, next) {
 
 router.get('/upload', function(req, res, next) {
   res.render("upload");
+});
+
+router.get('/upload_json', function(req, res, next) {
+  res.render("upload_json");
 });
 
 router.post("/upload", function(req, res, next) {

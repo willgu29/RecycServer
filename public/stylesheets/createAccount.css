@@ -1,7 +1,7 @@
 @font-face {
     
   font-family: 'Monique';
-  src: url('fonts/monique.otf') format('otf');
+  src: url('/fonts/monique.otf') format('opentype');
 }
 
 *{
@@ -15,7 +15,7 @@ html, body{
 	padding: 0;
 	margin: 0;
 	background-color: #FFF;
-    width: 100%;
+/*    width: 100%;*/
     
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -30,7 +30,7 @@ html, body{
     font-size: 40px;
     color: #FFF;
     padding: 50px 0px 50px 60px;
-    background-color: #EA5455;
+    background-color: #613f7e;
     margin: 0;
     font-kerning: none;
 }
@@ -38,6 +38,7 @@ html, body{
 form{
     
     margin: 0;
+	background-color: #3a254b;
 }
 
 ul{
@@ -47,13 +48,16 @@ ul{
 }
 
 li{
-	border-bottom: 1px solid rgb(230, 230, 230);
+	
+	border-bottom: 2px solid rgba(255, 255, 255, 0.13);
 	padding: 40px 0;
 }
 
 form h1, label{
+	
 	font-size: 35px;
-    color: #a7a7a7;
+    color: #FFF;
+    opacity: 0.6;
     display: inline;
     padding-left: 60px;
 }
@@ -64,9 +68,9 @@ input[type=text], input[type=password]{
     left: 0;
     outline: none;
     border: none;
-    background-color: #FFF;
+    background-color: #3a254b;
     font-size: 35px;
-    color: #000;
+    color: #FFF;
     display: inline;
 
     -webkit-transition:color .25s ease-in;
@@ -76,8 +80,10 @@ input[type=text], input[type=password]{
 }
 
 .select-style{
+	
     display: inline;
     padding-left: 40px;
+	background-color: #3a254b;
 }
 
 .select-style select {
@@ -86,10 +92,9 @@ input[type=text], input[type=password]{
     width: 70%;
     border: none;
     box-shadow: none;
-    background: transparent;
     background-image: none;
     -webkit-appearance: none;
-    background-color: #FFF;
+    background: #3a254b;
     font-size: 35px;
     color: #000;
 }
@@ -100,22 +105,25 @@ input[type=text], input[type=password]{
 }
 
 #submit{
+	
     width: 100%;
     outline: none;
     border: none;
     font-size: 40px;
-    color: #FFF;
+    color: #fff;
     padding: 50px 0px 50px 60px;
-    background-color: #790001;
+    background-color: #4a4250;
 
-    -webkit-transition:background-color .1s ease-in;
-    -moz-transition:background-color .1s ease-in;
-    -o-transition:background-color .1s ease-in;
-    transition:background-color .1s ease-in;
+    -webkit-transition:background-color .05s ease-in-out;
+    -moz-transition:background-color .05s ease-in-out;
+    -o-transition:background-color .05s ease-in-out;
+    transition:background-color .05s ease-in-out;
 }
 
 #submit:hover{
-    background-color: rgba(121, 0, 1, 0.83);
+	
+   	background-color: #332b3a;
+	color: #fff;
 }
 
 #error{

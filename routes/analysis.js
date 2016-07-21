@@ -1,26 +1,30 @@
 var express = require('express');
 var router = express.Router();
-
+var wordspace = require('../analysis/test.js');
 // analysis/...
 
 router.get('/', function (req,res,next){
-
+	res.send("hello");
 });
 
-router.get('wordspace', function (req, res, next) {
+router.get('/wordspace', function (req, res, next) {
+	
+	 var recordings = ['./analysis/adam_1_1.json', './analysis/tanuj_1_1.json', './analysis/will_1_1.json'];
+	 
+    var data = wordspace(recordings);//session.recordingsData);
+//	var length = length(recordings);
+	
+    var person = data[0][0];
+	res.send(JSON.stringify(data, null, 3));
 
-  Session.findOne({_id : sessionId}, function (err, session) {
-    var data = adamsFunction(session.recordingsData);
-    var people = session.people;
-    var wordspace = data.wordspace;
+//  Session.findOne({_id : sessionId}, function (err, session) {
+	 
+	
     // res.status(200).json({
     //   "people" : //people ids
     //   "wordspace" : //% talking for each person
     // });
-  });
-
-
-
+//  });
 
 });
 

@@ -1,4 +1,15 @@
-var analysis = function (recordingsData){
+//var analysis = {
+//	
+//	function wordspace = function (recordingsData) {
+//	
+//	};
+//
+//	function length = function (recordingsData) {
+//		
+//	};
+//}
+
+var wordSpace = function (recordingsData){
 
 	var fs = require('fs'); //require the file system
 
@@ -11,7 +22,7 @@ var analysis = function (recordingsData){
 		//console.log(fileCont[i].job.name);
 	}
 
-	var words = obj.words;
+//	var words = obj.words;
 	var words = [];
 
 	fileCont.forEach(function(currVal, index, array) {
@@ -22,7 +33,7 @@ var analysis = function (recordingsData){
 
 	var numPeople = fileCont.length;
 	var totalLength = parseFloat(fileCont[0].job.duration); //Grab length of leader's clip
-	var division = 2;
+	var division = 1;
 	var partLen = totalLength/division;
 
 	var part = [];  //stores entire partitions for each person
@@ -86,9 +97,8 @@ var analysis = function (recordingsData){
 	
 	
 	//access part partition via part[personNum][partitionNum]
-	
 	return part;
 	
 }
 
-module.exports = analysis;
+module.exports = wordSpace;

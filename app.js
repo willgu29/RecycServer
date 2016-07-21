@@ -16,6 +16,7 @@ var auth = require('./routes/auth');
 var speechmatics = require("./routes/speechmatics");
 var amazonAWS = require('./routes/amazon');
 var sessions = require('./routes/sessions');
+var analysis = require('./routes/analysis');
 
 var app = express();
 
@@ -33,6 +34,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'analysis')));
+
+
 app.use(bodyParser());
 app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
@@ -41,9 +45,10 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
-app.use('/speechmatics', speechmatics);
+app.use('/analysis', analysis);
+app.use("/speechmatics", speechmatics);
+app.use('/sessions', sessions);
 app.use('/aws', amazonAWS);
-app.use("/sessions", sessions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
