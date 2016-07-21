@@ -1,15 +1,38 @@
-<div id="createSession">
+<html>
 
-{{> nav}}
+<head>
 
-<h1>Create a New Meeting</h1>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="description" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link href="/stylesheets/iframe.css" rel="stylesheet" type="text/css">
+
+    <title>Record | Create</title>
+
+    <link rel="shortcut icon" type="image/png" href="/images/logo.svg">
+
+</head>
 
 
-<form action="/sessions/create" method="post">
+<body>
+	
+	<div id = "header">
+      
+        <img id = "logo" src="/images/logo.svg" onclick="window.location='/sessions';"/>
+        <h1><span id="home" onclick="window.location='/sessions';">record</span><span id="page"> // create</span></h1>
+       
+    </div>
 
-    <input id="sessionName" type="text" name="sessionName" placeholder="Meeting Name" maxlength="20"/>
-    <input type="submit" id="submit" name="createSession" value="Create"/>
+    <form action="/sessions/create" method="post">
 
-</form>
+        <h1>Meeting Name/Goal:</h1><input id="sessionName" type="text" name="sessionName" placeholder="eg.Weekly Project Status Meeting" maxlength="20"/>
+        <input type="submit" id="submit" name="createSession" value="Create"/>
 
-</div>
+    </form>
+
+</body>
+
+</html>

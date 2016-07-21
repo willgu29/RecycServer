@@ -23,7 +23,8 @@ body {
 	width: auto;
 	height: auto;
 	
-	margin: 0;
+	margin: 50px;
+    padding: 0;
     
     background-color: #3a254b;
 /*
@@ -36,13 +37,13 @@ background: linear-gradient(to top left, #000000 , #53346D);
 }
 
 #header{ 
-	
-    border-radius: 10px;
     
+    border-radius: 10px;
+	
 	background-color: #613f7e;
 	padding-top: 10px;
-    margin: 50px;
-
+    
+	width: 100%;
     height: 100px;
     
     -webkit-user-select: none;  /* Chrome all / Safari all */
@@ -94,100 +95,50 @@ background: linear-gradient(to top left, #000000 , #53346D);
     letter-spacing: 0.3em; 
 }
 
-
-#start, #join {
+#code-body {
     
-    text-decoration: none;
-    color: #fff;
-    padding: 10px 20px;
-    
-    margin: 27px 20px 0 0;
-	display: inline-block;
-	float: right;
-    
-    background-color: #794e9d;
-    
-    border-radius: 5px;
-    
-    border: 2px solid #794e9d;
-}
-
-#start {
-    
-    margin-right: 50px;
-}
-
-#start:hover, #join:hover {
-    
-    border-color: #fff;
-}
-
-#table-container {
-    
-    margin: 50px;
+    margin-top: 50px;
+    background-color: #613f7e;
     border-radius: 10px;
-    overflow: hidden;
+    padding: 10px 0 0 0;
 }
 
-table {
-    
-	font-size: 17px;
-	width: 100%;
-	color: #000;
-	border-collapse: collapse;
-}
-
-#table-header {
-	
-	background-color: #905db9;
-}
-
-th {
-	
-	font-family: 'Monique';
-	font-weight: 700;
-	padding: 20px 0px 20px 30px;
-	text-align: left;
+#code {
     
     color: #fff;
+    text-align: center;
+    font-size: 100px;
 }
 
-tr {
-	
-	cursor: pointer;
-	background-color: #6a4688;
-}
-
-tr:not(:first-child):hover {
-	
-	background-color: #513a65;
-}
-
-td {
-	
+#code-body p{
+    
+    width: 60%;
     color: #fff;
-	font-family: 'Helvetica';
-	border-top: 5px solid #3a254b;
-	padding: 25px 0px 25px 35px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 25px;
 }
 
-iframe{
+
+#submit{
+
+/*	border: 2px solid #8154a8;*/
+    color: #fff;
+    background-color: #412b52;
+
+    width: 100%;
+    outline: none;
+    border: none;
+    display: block;
+    font-size: 20px;
+    padding: 25px 0;
+/*    border-radius: 10px;*/
+    cursor: pointer;
+    margin: 80px auto 0 auto;
+}
+
+#submit:hover {
 	
-	position: fixed;
-	right: -18%;
-	top: 0;
-	
-	width: 15%;
-	height: 100%;
-	float: right;
-	display: inline-block;
-		
-	border: 10px solid white;
-	border-left: none;
-	
-	 -webkit-transition: right 0.45s ease;
-	 -moz-transition: right 0.45s ease;
-	 -ms-transition: right 0.45s ease;
-	 -o-transition: right 0.45s ease;
-	 transition: right 0.45s ease;
+	background-color: #32243e;
+/*	border: 2px solid white;*/
 }

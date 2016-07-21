@@ -10,7 +10,7 @@
 
     <link href="/stylesheets/sessions.css" rel="stylesheet" type="text/css">
 
-    <title>RecYC | Sessions</title>
+    <title>Record | Meetings</title>
 
     <link rel="shortcut icon" type="image/png" href="/images/logo.svg">
 
@@ -21,22 +21,13 @@
 	
 	<div id = "header">
       
-       	<a href="/sessions">
-       		<img id = "logo" src="/images/logo.svg">
-      		<h1>record</h1>
-      	</a>
+        <img id = "logo" src="/images/logo.svg" onclick="window.location='/sessions';"/>
+        <h1><span id="home" onclick="window.location='/sessions';">record</span><span id="page"> // meetings</span></h1>
        
-       <a href="/createSession" id="start">start</a>
-       <a href="/joinSession" id="join">join</a>
+        <a href="/createSession" id="start">create</a>
+        <a href="/joinSession" id="join">join</a>
        
     </div>
-
-
-	<div id="title">
-
-		<h1>meetings</h1>
-		
-	</div>
 
 <!--
 	<form action="/sessions/join" method="post">
@@ -46,9 +37,7 @@
 
 	</form>
 -->
-
-
-<div id="table-container">
+	<div id="table-container">
 	
 	<table>
 		
@@ -74,7 +63,9 @@
 
 	</table>
 	
-	</div>
+    </div>
+	
+	<iframe src="/joinSession"></iframe>
 
 </body>
 

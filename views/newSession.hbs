@@ -1,15 +1,45 @@
-<div id="newSession">
+<html>
 
-  <h1>Code: {{code}}</h1>
+<head>
 
-   Give this to your colleagues to join the meeting through Recyc. And click
-   the button below when you're ready to start the meeting.
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-   <form action="/sessions/start/{{code}}" method="post">
+    <meta name="description" content="">
 
-       <input type="submit" id="submit" name="Start Meeting" value="Start Meeting"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-   </form>
+    <link href="/stylesheets/newSession.css" rel="stylesheet" type="text/css">
+
+    <title>Record | Pre-Meeting</title>
+
+    <link rel="shortcut icon" type="image/png" href="/images/logo.svg">
+
+</head>
 
 
-</div>
+<body>
+	
+	<div id = "header">
+      
+        <img id = "logo" src="/images/logo.svg" onclick="window.location='/sessions';"/>
+        <h1><span id="home" onclick="window.location='/sessions';">record</span><span id="page"> // pre-meeting</span></h1>
+       
+    </div>
+    
+    <div id="code-body">
+    
+        <h1 id="code">{{code}}</h1>
+
+        <p>Send this code to your colleagues to join the meeting.<br>Click the button below when you're ready to start the meeting.</p>
+
+       <form action="/sessions/start/{{code}}" method="post">
+
+           <input type="submit" id="submit" name="Start Meeting" value="Start Meeting"/>
+
+       </form>
+       
+    </div>
+   
+</body>
+
+</html>

@@ -27,11 +27,11 @@ router.get('/meeting/:sessionID', function (req, res, next) {
 });
 
 router.get("/joinSession", function(req, res, next) {
-  res.render('joinSession');
+  res.render('joinSession', {layout: false});
 });
 
 router.get("/createSession", function(req, res, next) {
-  res.render('createSession');
+  res.render('createSession', {layout: false});
 });
 
 router.get('/record', function(req, res, next) {

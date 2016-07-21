@@ -28,15 +28,8 @@ body, html{
 
 body {
 	
-	
-
-
-
-background: #000000; /* fallback for old browsers */
-background: -webkit-linear-gradient(to top left, #000000 , #53346D); /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top left, #000000 , #53346D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        
-        
+background: -webkit-linear-gradient(to top left, #000000 , #53346D);
+background: linear-gradient(to top left, #000000 , #53346D); 
 	
 	width: auto;
 	height: auto;
@@ -103,8 +96,8 @@ input[type=text], input[type=password]{
 
     width: 335px;
     outline: none;
-    border: 2px solid #8154a8;
-    background-color: #8154a8;
+    border: 2px solid #3a254b;
+    background-color: #3a254b;
     font-size: 25px;
     display: block;
     color: #FFF;

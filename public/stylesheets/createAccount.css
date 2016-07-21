@@ -25,11 +25,6 @@ html, body{
     user-select: none;
 }
 
-body {
-	
-	border: 10px solid white;
-}
-
 #header{
     
     font-size: 40px;
@@ -43,7 +38,7 @@ body {
 form{
     
     margin: 0;
-	background-color: #8154a8;
+	background-color: #3a254b;
 }
 
 ul{
@@ -73,7 +68,7 @@ input[type=text], input[type=password]{
     left: 0;
     outline: none;
     border: none;
-    background-color: #8154a8;
+    background-color: #3a254b;
     font-size: 35px;
     color: #FFF;
     display: inline;
@@ -88,7 +83,7 @@ input[type=text], input[type=password]{
 	
     display: inline;
     padding-left: 40px;
-	background-color: #8154a8;
+	background-color: #3a254b;
 }
 
 .select-style select {
@@ -99,7 +94,7 @@ input[type=text], input[type=password]{
     box-shadow: none;
     background-image: none;
     -webkit-appearance: none;
-    background: #8154a8;
+    background: #3a254b;
     font-size: 35px;
     color: #000;
 }
@@ -115,9 +110,9 @@ input[type=text], input[type=password]{
     outline: none;
     border: none;
     font-size: 40px;
-    color: #613f7e;
+    color: #fff;
     padding: 50px 0px 50px 60px;
-    background-color: #f1e4fc;
+    background-color: #4a4250;
 
     -webkit-transition:background-color .05s ease-in-out;
     -moz-transition:background-color .05s ease-in-out;
@@ -127,7 +122,7 @@ input[type=text], input[type=password]{
 
 #submit:hover{
 	
-   	background-color: #39204e;
+   	background-color: #332b3a;
 	color: #fff;
 }
 
