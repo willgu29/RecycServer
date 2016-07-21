@@ -1,21 +1,20 @@
 function upload() {
 
-  // var audio = document.getElementById('audio');
+  var audio = document.getElementById('audio');
 
   alert("Upload successful");
 
-  // alert(JSON.stringify(audio));
-  //MISSING DATA_FILE????
+  alert(JSON.stringify(audio));
 
-  // $.ajax({
-  //     url: "https://recyc.herokuapp.com/speechmatics/upload",
-  //     type: "POST",
-  //     data: {"file" : audio},
-  //     processData: false,
-  //     contentType: "multipart/form-data",
-  //     success: function (res) {
-  //       alert(res);
-  //     }
-  // });
+  $.ajax({
+      url: "localhost:3000/analysis/wordspace",
+      type: "POST",
+      data: {"file" : audio},
+      processData: false,
+      // contentType: "multipart/form-data",
+      success: function (res) {
+        alert(res);
+      }
+  });
 
 };

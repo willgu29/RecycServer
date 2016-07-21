@@ -19,32 +19,32 @@ html{
 
 
 body {
-	
+
 	width: auto;
 	height: auto;
-	
+
 	margin: 0;
-    
+
     background-color: #3a254b;
 /*
-    
+
 background: -webkit-linear-gradient(to top left, #000000 , #53346D);
-background: linear-gradient(to top left, #000000 , #53346D); 
+background: linear-gradient(to top left, #000000 , #53346D);
 */
 
-    
+
 }
 
-#header{ 
-	
+#header{
+
     border-radius: 10px;
-    
+
 	background-color: #613f7e;
 	padding-top: 10px;
     margin: 50px;
 
     height: 100px;
-    
+
     -webkit-user-select: none;  /* Chrome all / Safari all */
   	-moz-user-select: none;     /* Firefox all */
   	-ms-user-select: none;      /* IE 10+ */
@@ -52,7 +52,7 @@ background: linear-gradient(to top left, #000000 , #53346D);
 }
 
 #logo{
-	
+
 	float: left;
 	display: inline-block;
 
@@ -62,75 +62,75 @@ background: linear-gradient(to top left, #000000 , #53346D);
 }
 
 #logo:hover {
-    
+
     animation: blink 1s ease-in-out infinite alternate;
 }
 
 #header h1{
-    
+
     margin: 18px 0px;
-	
+
 	float: left;
-	
+
 	display: inline-block;
-	
+
     font-size: 40px;
     letter-spacing: 0.3em;
     color: #FFF;
 
     display: inline;
-    
+
     cursor: default;
 }
 
 #home {
-    
+
     cursor: pointer;
 }
 
 #page {
-    
+
     font-size: 30px;
-    letter-spacing: 0.3em; 
+    letter-spacing: 0.3em;
 }
 
 
-#start, #join {
-    
+#start, #join, #logout {
+
     text-decoration: none;
     color: #fff;
     padding: 10px 20px;
-    
+
     margin: 27px 20px 0 0;
 	display: inline-block;
 	float: right;
-    
+
     background-color: #794e9d;
-    
+
     border-radius: 5px;
-    
+
     border: 2px solid #794e9d;
 }
 
-#start {
-    
+#logout {
+
     margin-right: 50px;
 }
 
-#start:hover, #join:hover {
-    
+#start:hover, #join:hover, #logout:hover {
+
     border-color: #fff;
 }
 
 #table-container {
-    
+
     margin: 50px;
     border-radius: 10px;
     overflow: hidden;
 }
 
 table {
-    
+
 	font-size: 17px;
 	width: 100%;
 	color: #000;
@@ -138,33 +138,33 @@ table {
 }
 
 #table-header {
-	
+
 	background-color: #905db9;
 }
 
 th {
-	
+
 	font-family: 'Monique';
 	font-weight: 700;
 	padding: 20px 0px 20px 30px;
 	text-align: left;
-    
+
     color: #fff;
 }
 
 tr {
-	
+
 	cursor: pointer;
 	background-color: #6a4688;
 }
 
 tr:not(:first-child):hover {
-	
+
 	background-color: #513a65;
 }
 
 td {
-	
+
     color: #fff;
 	font-family: 'Helvetica';
 	border-top: 5px solid #3a254b;
@@ -172,19 +172,19 @@ td {
 }
 
 iframe{
-	
+
 	position: fixed;
 	right: -18%;
 	top: 0;
-	
+
 	width: 15%;
 	height: 100%;
 	float: right;
 	display: inline-block;
-		
+
 	border: 10px solid white;
 	border-left: none;
-	
+
 	 -webkit-transition: right 0.45s ease;
 	 -moz-transition: right 0.45s ease;
 	 -ms-transition: right 0.45s ease;
