@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var wordspace = require('../analysis/test.js');
+var meetingTime = require('../analysis/totalMeetingTime.js');
+
 // analysis/...
 
 router.get('/', function (req,res,next){
@@ -9,22 +11,34 @@ router.get('/', function (req,res,next){
 
 router.get('/wordspace', function (req, res, next) {
 
-	 var recordings = ['./analysis/adam_1_1.json', './analysis/tanuj_1_1.json', './analysis/will_1_1.json'];
+	  var recordings = ['./analysis/adam_1_1.json', './analysis/tanuj_1_1.json', './analysis/will_1_1.json'];
 
     var data = wordspace(recordings);//session.recordingsData);
-//	var length = length(recordings);
-
-    var person = data[0][0];
-	res.send(JSON.stringify(data, null, 3));
-
-//  Session.findOne({_id : sessionId}, function (err, session) {
+    var meetingLength = meetingTime(recordings);
 
 
-    // res.status(200).json({
-    //   "people" : //people ids
-    //   "wordspace" : //% talking for each person
-    // });
-//  });
+    var people = ['Adam', 'Tanuj', 'Will'];
+
+    var speakingTime = [];
+    for (var i = 0; i < data.length; i++) {
+      var personData = data[i][0];
+      var speakingPercent = (personData.duration/meetingLength)*100;
+      var format = parseFloat(Math.round(speakingPercent * 100) / 100).toFixed(2);
+
+      speakingTime.push({
+        "wordspace" : format,
+        "name" : people[i],
+      });
+    }
+
+
+
+
+    res.render("wordspaceExample", {
+      meetingLength: meetingLength,
+      speakingTime: speakingTime,
+    });
+
 
 });
 
