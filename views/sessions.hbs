@@ -48,7 +48,10 @@
 
 				<td class="sessionName">{{sessionName}}</td>
 				<td>{{dateCreated}}</td>
-				<td>{{members}}</td>
+				<td>{{#each members}}
+						<h3>{{firstName}} {{lastName}}</h3>
+					{{/each}}
+				</td>
 
 			</tr>
 
