@@ -49,6 +49,15 @@ router.post("/wordspace", function (req, res, next) {
   res.send(JSON.stringify(data, null, 3));
 });
 
+router.get('/jsonupload', function (req, res, next) {
+	res.render("jsonUpload");
+});
+
+router.post('/jsonupload', function (req, res, next) {
+	console.log(req);
+	res.render("jsonUpload");
+});
+
 router.get('emotion', function (req, res, next) {
 
 });
