@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var wordspace = require('../analysis/test.js');
 var meetingTime = require('../analysis/totalMeetingTime.js');
+var multer = require('multer');
+var fs = require('fs');
+
+router.use(multer({dest:'./uploads/'}).array('multiInputFileName'));
 
 // analysis/...
 
@@ -54,8 +58,17 @@ router.get('/jsonupload', function (req, res, next) {
 });
 
 router.post('/jsonupload', function (req, res, next) {
-	console.log(req);
-	res.render("jsonUpload");
+	var numFiles = req.files.length;
+	console.log(numFiles);
+	var filePath = [];
+
+	for(var i=0;i<numFiles;i++) {
+		filePath[i] = req.files[i].path;
+	}
+	console.log(filePath);
+	console.log(fs.readFileSync(filePath[0],'utf8'));
+	res.status(204).end();
+	//res.render("jsonUpload");
 });
 
 router.get('emotion', function (req, res, next) {
