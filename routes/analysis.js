@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var wordspace = require('../analysis/test.js');
 var meetingTime = require('../analysis/totalMeetingTime.js');
+var multer = require('multer');
+var fs = require('fs');
+
+router.use(multer({dest:'./uploads/'}).array('multiInputFileName'));
 
 // analysis/...
 
@@ -47,6 +51,24 @@ router.post("/wordspace", function (req, res, next) {
   var data = wordspace(recordings);
   var person  = data[0][0];
   res.send(JSON.stringify(data, null, 3));
+});
+
+router.get('/jsonupload', function (req, res, next) {
+	res.render("jsonUpload");
+});
+
+router.post('/jsonupload', function (req, res, next) {
+	var numFiles = req.files.length;
+	console.log(numFiles);
+	var filePath = [];
+
+	for(var i=0;i<numFiles;i++) {
+		filePath[i] = req.files[i].path;
+	}
+	console.log(filePath);
+	console.log(fs.readFileSync(filePath[0],'utf8'));//This is the code that reads data from the path.  Use this to extract JSON into analysis backend.
+	res.status(204).end();
+	//res.render("jsonUpload");
 });
 
 router.get('emotion', function (req, res, next) {
