@@ -66,7 +66,7 @@ router.post('/jsonupload', function (req, res, next) {
 		filePath[i] = req.files[i].path;
 	}
 	console.log(filePath);
-	console.log(fs.readFileSync(filePath[0],'utf8'));
+	console.log(fs.readFileSync(filePath[0],'utf8'));//This is the code that reads data from the path.  Use this to extract JSON into analysis backend.
 	res.status(204).end();
 	//res.render("jsonUpload");
 });
