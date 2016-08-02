@@ -5,7 +5,7 @@ function myFun() {
 	var jsonData = document.getElementById("jsonData");
 	alert('before ajax request');
 	$.ajax({
-		url: "localhost:4000/analysis/jsonupload",
+		url: "https://recyc.herokuapp.com/analysis/jsonupload",
 		method: "POST",
 		data: JSON.stringify(jsonData),
 		contentType: "application/json",
