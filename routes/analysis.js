@@ -5,7 +5,7 @@ var meetingTime = require('../analysis/totalMeetingTime.js');
 var multer = require('multer');
 var fs = require('fs');
 
-router.use(multer({dest:'./uploads/'}).array('multiInputFileName'));
+router.use(multer({dest:'./tmp'}).array('multiInputFileName'));
 
 // analysis/...
 
@@ -58,16 +58,17 @@ router.get('/jsonupload', function (req, res, next) {
 });
 
 router.post('/jsonupload', function (req, res, next) {
-	var numFiles = req.files.length;
-	console.log(numFiles);
-	var filePath = [];
+	console.log(req.body.data);
+  // var numFiles = req.files.length;
+	// console.log(numFiles);
+	// var filePath = [];
 
-	for(var i=0;i<numFiles;i++) {
-		filePath[i] = req.files[i].path;
-	}
-	console.log(filePath);
-	console.log(fs.readFileSync(filePath[0],'utf8'));//This is the code that reads data from the path.  Use this to extract JSON into analysis backend.
-	res.status(204).end();
+	// for(var i=0;i<numFiles;i++) {
+	// 	filePath[i] = req.files[i].path;
+	// }
+	// console.log(filePath);
+	// console.log(fs.readFileSync(filePath[0],'utf8'));//This is the code that reads data from the path.  Use this to extract JSON into analysis backend.
+	// res.status(204).end();
 	//res.render("jsonUpload");
 });
 
