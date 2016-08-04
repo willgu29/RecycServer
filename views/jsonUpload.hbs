@@ -1,20 +1,73 @@
+<h2>Please Only pass in valid JSON of the conversation!</h2>
+
+<form enctype="multipart/form-data" action="javascript:convertJSON()">
+    <input type="file" id="jsonData" multiple>
+    <input type="submit" value="Upload JSON">
+</form>
+
+<p id="test"></p>
+
+<script>
+	function convertJSON() {
+		var contentArr = [];
+		var files = document.getElementById('jsonData').files;
+
+
+		for(var i=0; i<files.length ;i++) {
+			var file = files[i];
+			var reader = new FileReader();
+			reader.onload = function(event) {
+				contentArr.push(event.target.result);
+				console.log(event.target.result);
+				console.log(contentArr);
+				// contentArr.push = event.target.result;
+			};
+			reader.readAsText(file);
+		}
+
+		if(contentArr.length === files.length) {
+			console.log('same size');
+		}
+		//return contentArr;
+
+
+		// var file = document.getElementById('jsonData').files[0];
+		// console.log(file);
+
+		// var reader = new FileReader();
+		// reader.onload = function(event) {
+		// 	alert(event.target.result);
+		// };
+
+		// reader.readAsText(file);
+		// console.log(reader);
+
+		// return contentArr;
+	};
+
+</script>
+
 
 <script>
 
-function myFun() {
-	var jsonData = document.getElementById("jsonData");
+function getDataContent() {
+	//var jsonData = document.getElementById("jsonData").files[0];
 	alert('before ajax request');
-	$.ajax({
-		url: "localhost:4000/analysis/jsonupload",
-		method: "POST",
-		data: JSON.stringify(jsonData),
-		contentType: "application/json",
-		complete: callback
-	});
+	var reader = new FileReader();
 
-	function callback() {
-		alert('we did it');
-	};
+	document.getElementById("test").innerHTML = reader.readAsDataURL(jsonData);
+
+	// $.ajax({
+	// 	url: "localhost:4000/analysis/jsonupload",
+	// 	method: "POST",
+	// 	data: JSON.stringify(jsonData),
+	// 	contentType: "application/json",
+	// 	complete: callback
+	// });
+
+	// function callback() {
+	// 	alert('we did it');
+	// };
 	console.log(jsonData);
 	// console.log(JSON.stringify(data.files[0]));
 };
@@ -34,11 +87,5 @@ function myFun() {
 // })
 </script>
 
-<h2>Please Only pass in valid JSON of the conversation!</h2>
-
-<form enctype="multipart/form-data" id="jsonData">
-    <input type="file" id="jsonData" multiple onchange="myFun()">
-    <input type="submit" value="Upload photo">
-</form>
 
 
