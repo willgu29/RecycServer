@@ -12,7 +12,6 @@
 		var contentArr = [];
 		var files = document.getElementById('jsonData').files;
 
-
 		for(var i=0; i<files.length ;i++) {
 			var file = files[i];
 			var reader = new FileReader();
@@ -25,24 +24,16 @@
 			reader.readAsText(file);
 		}
 
-		if(contentArr.length === files.length) {
-			console.log('same size');
-		}
-		//return contentArr;
+		$.ajax({
+			url: "localhost:3000/analysis/wordspace",
+			type: "POST",
+			data: {"file" : contentArr},
+			processData: false,
+			success: function (res) {
+				alert(res);
+			}
+		});
 
-
-		// var file = document.getElementById('jsonData').files[0];
-		// console.log(file);
-
-		// var reader = new FileReader();
-		// reader.onload = function(event) {
-		// 	alert(event.target.result);
-		// };
-
-		// reader.readAsText(file);
-		// console.log(reader);
-
-		// return contentArr;
 	};
 
 </script>
