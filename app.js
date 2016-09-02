@@ -83,6 +83,7 @@ app.use(function(err, req, res, next) {
 
 /// MONGOOOSE Database Linking ****
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 var connectDBLink = process.env.MONGO_DB || "mongodb://localhost/recyc";
 mongoose.connect(connectDBLink);
