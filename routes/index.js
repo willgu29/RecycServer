@@ -25,7 +25,18 @@ router.get("/about", function(req, res, next) {
 router.get('/meeting/:sessionID', function (req, res, next) {
   console.log('hi');
   console.log(req.user._id);
-  res.render("meeting", {id : req.params.sessionID, userId: req.user._id});
+    Session
+    .findOne({"_id" : req.params.sessionID})
+    .populate("members", 'firstName lastName -_id')
+    .exec(function (err, session) {
+      if (err) throw err; //TODO: Change throw to a redirect
+
+      console.log(session);
+      console.log(session.members);
+      res.render("meeting", {id : req.params.sessionID, userId: req.user._id, members: session.members});
+    }
+  );
+
 });
 
 router.get("/joinSession", function(req, res, next) {
