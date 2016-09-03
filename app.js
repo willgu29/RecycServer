@@ -42,6 +42,24 @@ app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.all('*', loggedIn);
+
+function loggedIn(req, res, next) {
+    var _=require('underscore');
+    var nonSecurePaths = ['/', '/login', '/auth/login'];
+    if(_.contains(nonSecurePaths, req.path)) return next();
+
+    if(req.path == '/login') {
+      return next();
+    }
+    if (req.user) {
+        next();
+    } else {
+      console.log('redirecting');
+        res.redirect('/login');
+    }
+}
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
