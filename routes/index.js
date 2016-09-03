@@ -41,8 +41,8 @@ router.get('/meeting/:sessionID', function (req, res, next) {
 
 router.get("/joinSession", function(req, res, next) {
   var validMeeting = req.query.validMeeting;
-  console.log(validMeeting);
-  console.log(typeof(validMeeting));
+  // console.log(validMeeting);
+  // console.log(typeof(validMeeting));
   if(validMeeting == 0) {
     console.log("Not valid meeting code");
     res.render('joinSession', {layout: false, errorMessage: "This is not a valid Meeting Code"});
