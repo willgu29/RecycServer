@@ -1,6 +1,13 @@
 <div id="meeting">
 
   {{id}}
+
+  Session ID: {{id}}
+<br><br><br><br>
+Members:
+  {{#each members}}
+    <li>{{firstName}} {{lastName}}</li>
+  {{/each}}
   <p>Show members in meeting, and record button, then stop button</p>
 
 
