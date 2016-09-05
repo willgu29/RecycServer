@@ -20,10 +20,10 @@ router.get('/wordspace', function (req, res, next) {
     var data = wordspace(recordings);//session.recordingsData);
     var meetingLength = meetingTime(recordings);
 
-
     var people = ['Adam', 'Tanuj', 'Will'];
 
     var speakingTime = [];
+	
     for (var i = 0; i < data.length; i++) {
       var personData = data[i][0];
       var speakingPercent = (personData.duration/meetingLength)*100;
@@ -35,15 +35,10 @@ router.get('/wordspace', function (req, res, next) {
       });
     }
 
-
-
-
     res.render("wordspaceExample", {
       meetingLength: meetingLength,
       speakingTime: speakingTime,
     });
-
-
 });
 
 router.post("/wordspace", function (req, res, next) {
@@ -72,8 +67,12 @@ router.post('/jsonupload', function (req, res, next) {
 	//res.render("jsonUpload");
 });
 
-router.get('emotion', function (req, res, next) {
+router.get('/emotion', function (req, res, next) {
 
+});
+
+router.get('/timeline', function (req,res,next){
+	res.render('timeline', {layout: false});
 });
 
 
