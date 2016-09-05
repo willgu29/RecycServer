@@ -91,11 +91,12 @@ router.post('/join', function (req,res,next){
         //IF ALREADY MEMBER, THEN SHOW
 
         if (err || session == undefined) {
-          res.status(400).json({
-            status: false,
-            session: undefined,
-            message: err,
-          });
+          res.redirect("../joinSession?validMeeting=0");
+          // res.status(400).json({
+          //   status: false,
+          //   session: undefined,
+          //   message: err,
+          // });
 
         } else {
 
