@@ -1,40 +1,70 @@
-<div id="meeting">
+<html>
 
-  {{id}}
+<head>
 
-  Session ID: {{id}}
-<br><br><br><br>
-Members:
-  {{#each members}}
-    <li>{{firstName}} {{lastName}}</li>
-  {{/each}}
-  <p>Show members in meeting, and record button, then stop button</p>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+    <meta name="description" content="">
 
-  <a href="/record">Setup Recording</a>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <link href="/stylesheets/meeting.css" rel="stylesheet" type="text/css">
 
-  <form action="/sessions/end/{{id}}" method="post">
+    <title>Record | Meeting</title>
 
-      <input type="submit" id="submit" name="endMeeting" value="End Meeting"/>
+    <link rel="shortcut icon" type="image/png" href="/images/logo.svg">
 
-  </form>
-
-  <div id="sessionID">{{id}}</div>
-  <div id="userId">{{userId}}</div>
-  <h1>Upload Your Audio File to...{{id}}</h1>
-  <h2>User: {{userId}}</h2>
-
-  <script src="../javascripts/upload.js"></script>
-
-    <form enctype="multipart/form-data" action="javascript:upload()">
-      <input type="file" name="audio" id="audio" accept="audio/*" />
-      <button type="submit" id="btn" >Upload File!</button>
-    </form>
-   
+</head>
 
 
-</div>
+<body>
+
+		<div id = "header">
+
+    	<img id = "logo" src="/images/logo.svg" onclick="window.location='/sessions';"/>
+      <h1><span id="home" onclick="window.location='/sessions';">record</span><span id="page"> // meeting</span></h1>
+
+      <a href="/auth/logout" id="logout">logout</a>
+      <a href="/createSession" id="start">create</a>
+      <a href="/joinSession" id="join">join</a>
+
+   	</div>
+ 		
+ 		<div id="meeting">
+
+			<h1>Session ID: {{id}}</h1>
+			
+			<table>
+			
+				<th id="table-header">Members</th>
+				
+				{{#each members}}
+					<tr><td>{{firstName}} {{lastName}}</td></tr>
+				{{/each}}
+			
+			</table>
+
+<!--			<p>Show members in meeting, and record button, then stop button</p>-->
+			<button class="button" href="/record" target="_blank">Setup Recording</button>
+
+			<form action="/sessions/end/{{id}}" method="post">
+				<input class="button" type="submit" id="endMeeting" name="endMeeting" value="End Meeting"/>
+			</form>
+			
+			<p>Upload your audio file for your meeting: {{id}}</p>
+
+			<script src="../javascripts/upload.js"></script>
+
+			<form id="audio_form" enctype="multipart/form-data" action="javascript:upload()">
+				<input type="file" class="custom-file-input" name="audio" id="audio" accept="audio/*" />
+				<button type="submit" class="button">Upload File!</button>
+			</form>
+
+		</div>
+
+</body>
+
+</html>
 
 <script>
  //Script to send audio file to AWS when file is loaded.
