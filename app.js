@@ -26,6 +26,10 @@ app.set('view engine', 'hbs');
 
 var hbs = require('hbs');
 hbs.registerPartials('./views/partials');
+hbs.registerHelper('toJSON', function(obj) {
+  return JSON.stringify(obj);
+});
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
