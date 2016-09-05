@@ -33,7 +33,7 @@ router.get('/meeting/:sessionID', function (req, res, next) {
 
       console.log(session);
       console.log(session.members);
-      res.render("meeting", {id : req.params.sessionID, userId: req.user._id, members: session.members});
+      res.render("meeting", {layout: false, id : req.params.sessionID, userId: req.user._id, members: session.members});
     }
   );
 

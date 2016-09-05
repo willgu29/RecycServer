@@ -1,14 +1,3 @@
-//var analysis = {
-//
-//	function wordspace = function (recordingsData) {
-//
-//	};
-//
-//	function length = function (recordingsData) {
-//
-//	};
-//}
-
 var wordSpace = function (recordingsData){
 
 	var fs = require('fs'); //require the file system
