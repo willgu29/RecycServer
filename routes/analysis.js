@@ -3,7 +3,22 @@ var router = express.Router();
 var wordspace = require('../analysis/test.js');
 var meetingTime = require('../analysis/totalMeetingTime.js');
 var multer = require('multer');
-var fs = require('fs');
+var fs = require('fs'), json;
+
+function readJsonFileSync(filepath, encoding){
+
+    if (typeof (encoding) == 'undefined'){
+        encoding = 'utf8';
+    }
+    var file = fs.readFileSync(filepath, encoding);
+    return JSON.parse(file);
+}
+
+function getConfig(file){
+
+    var filepath = __dirname + '/' + file;
+    return readJsonFileSync(filepath);
+}
 
 router.use(multer({dest:'./tmp'}).array('multiInputFileName'));
 
@@ -72,7 +87,12 @@ router.get('/emotion', function (req, res, next) {
 });
 
 router.get('/timeline', function (req,res,next){
-	res.render('timeline', {layout: false});
+  firstJSON = getConfig('../adam_1_2.json');
+  secondJSON = getConfig('../will_1_2.json');
+  thirdJSON = getConfig('../tanuj_1_2.json');
+  //jsonTest = getConfig('../tanuj_1_2.json');
+  //console.log(jsonTest);
+	res.render('timeline', {first: firstJSON, second: secondJSON, third: thirdJSON, layout: false});
 });
 
 
