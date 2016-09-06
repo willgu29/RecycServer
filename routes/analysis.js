@@ -91,8 +91,6 @@ router.get('/timeline', function (req,res,next){
   secondJSON = getConfig('../will_1_2.json');
   thirdJSON = getConfig('../tanuj_1_2.json');
   var data = [firstJSON, secondJSON, thirdJSON];
-  //jsonTest = getConfig('../tanuj_1_2.json');
-  //console.log(jsonTest);
 	res.render('timeline', {data: data, layout: false});
 });
 
