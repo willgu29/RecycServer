@@ -18,9 +18,17 @@
     
     <script type="text/javascript">
 			
+			var a = function(data) {
+        return data;
+    	}
+			
       google.charts.load('current', {'packages':['timeline']});
       google.charts.setOnLoadCallback(drawChart);
+			
       function drawChart() {
+				
+				var l_data = a({{{toJSON data}}});
+				
         var container = document.getElementById('timeline');
         var chart = new google.visualization.Timeline(container);
         var dataTable = new google.visualization.DataTable();
@@ -31,27 +39,25 @@
 				dataTable.addColumn({ type: 'date', id: 'End' });
 
 				var numPerson = 0, talkSegment, numTalkSegments;
-				var numPeople = {{data.length}};
-
-        dataTable.addRows([
-          [ 'Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
-          [ 'Adams',      new Date(1797, 2, 4),  new Date(1801, 2, 4) ],
-          [ 'Jefferson',  new Date(1801, 2, 4),  new Date(1809, 2, 4) ]]);
+				var numPeople = l_data.length;
 				
 				for (numPerson = 0; numPerson < numPeople; numPerson++) {
 
 					talkSegment = 0;
-//					var personTalkSegments = {{data.[numPerson]}};
-//					numTalkSegments = personTalkSegments.length;
-					
-					console.log(personTalkSegments);
+					var personTalkSegments = l_data[numPerson].speakers;
+					numTalkSegments = personTalkSegments.length;
 
-//					for (talkSegment = 0; talkSegment < numTalkSegments; talkSegment++) {
-//
+					console.log(personTalkSegments);
+					
+					for (talkSegment = 0; talkSegment < numTalkSegments; talkSegment++) {
+
 //						dataTable.addRows([
-//
-//							[('Person '+ (numPerson + 1).toString()) + , (talkSegment + 1).toString(), new Date(0, 0, 0, 0, 0, personTalkSegments[talkSegment].time), new Date(0, 0, 0, 0, 0, (personTalkSegments[talkSegment].time + personTalkSegments[talkSegment].duration)) ]]);
-//						}
+//          	[ 'Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ]]);
+						
+						dataTable.addRows([
+
+							[('Person '+ (numPerson + 1).toString()), new Date(0, 0, 0, 0, 0, parseFloat(personTalkSegments[talkSegment].time)), new Date(0, 0, 0, 0, 0, (parseFloat(personTalkSegments[talkSegment].time) + parseFloat(personTalkSegments[talkSegment].duration))) ]]);
+						}
 				}
 
 				chart.draw(dataTable);
@@ -73,13 +79,11 @@
         <a href="/createSession" id="start">create</a>
         <a href="/joinSession" id="join">join</a>
 
-    </div>
-
-    {{toJSON data.[0]}}
+    </div> 
     
 	<div id="table-container">
 		
-		<div id="timeline" style="height: 180px;"></div>
+		<div id="timeline" style="height: 380px; width: 100%;"></div>
 		
   </div>
 
