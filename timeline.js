@@ -19,40 +19,6 @@ var timeline_graph = function (recordingsData){
 	fileCont.forEach(function(currVal, index, array) {
 		talk[index] = currVal.speakers;
 	});
-	
-	var numPerson, talkSegment, numTalkSegments;
-	
-	
-	// GOOGLE CHARTS API
-	
-	google.charts.load('current', {'packages':['timeline']});
-  google.charts.setOnLoadCallback(drawChart);
-				
-  	var container = document.getElementById('timeline');
-    var chart = new google.visualization.Timeline(container);
-    var dataTable = new google.visualization.DataTable();
-
-    dataTable.addColumn({ type: 'string', id: 'Person' });
-		dataTable.addColumn({ type: 'string', id: 'Segment' });
-    dataTable.addColumn({ type: 'date', id: 'Start' });
-    dataTable.addColumn({ type: 'date', id: 'End' });
-			
-		for (numPerson = 0; numPerson < numPeople; numPerson++) {
-
-			numTalkSegments = talk[numPerson].length;
-			talkSegment = 0;
-			
-			var personTalkSegments = talk[numPerson];
-			
-			for (talkSegment = 0; talkSegment < numTalkSegments; talkSegment++) {
-				
-				dataTable.addRows([
-				
-					[('Person '+ (numPerson + 1).toString()) + , (talkSegment + 1).toString(), new Date(0, 0, 0, 0, 0, personTalkSegments[talkSegment].time), new Date(0, 0, 0, 0, 0, (personTalkSegments[talkSegment].time + personTalkSegments[talkSegment].duration)) ]]);
-				}
-		}
-		
-		chart.draw(dataTable);
 }
 
 module.exports = timeline_graph;

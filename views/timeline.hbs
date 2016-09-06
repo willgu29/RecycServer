@@ -15,6 +15,49 @@
     <link rel="shortcut icon" type="image/png" href="/images/logo.svg">
     
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script type="text/javascript">
+			
+      google.charts.load('current', {'packages':['timeline']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var container = document.getElementById('timeline');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+
+				dataTable.addColumn({ type: 'string', id: 'Person' });
+//				dataTable.addColumn({ type: 'string', id: 'Segment' });
+				dataTable.addColumn({ type: 'date', id: 'Start' });
+				dataTable.addColumn({ type: 'date', id: 'End' });
+
+				var numPerson = 0, talkSegment, numTalkSegments;
+				var numPeople = {{data.length}};
+
+        dataTable.addRows([
+          [ 'Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
+          [ 'Adams',      new Date(1797, 2, 4),  new Date(1801, 2, 4) ],
+          [ 'Jefferson',  new Date(1801, 2, 4),  new Date(1809, 2, 4) ]]);
+				
+				for (numPerson = 0; numPerson < numPeople; numPerson++) {
+
+					talkSegment = 0;
+					var personTalkSegments = {{data.[numPerson]}};
+//					numTalkSegments = personTalkSegments.length;
+					
+					console.log(personTalkSegments);
+
+//					for (talkSegment = 0; talkSegment < numTalkSegments; talkSegment++) {
+//
+//						dataTable.addRows([
+//
+//							[('Person '+ (numPerson + 1).toString()) + , (talkSegment + 1).toString(), new Date(0, 0, 0, 0, 0, personTalkSegments[talkSegment].time), new Date(0, 0, 0, 0, 0, (personTalkSegments[talkSegment].time + personTalkSegments[talkSegment].duration)) ]]);
+//						}
+				}
+
+				chart.draw(dataTable);
+			}
+
+		</script>
 
 </head>
 
@@ -31,8 +74,6 @@
         <a href="/joinSession" id="join">join</a>
 
     </div>
-
-    {{data}}
 
 	<div id="table-container">
 		
