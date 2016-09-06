@@ -33,7 +33,13 @@
     </div>
     {{{toJSON data}}}
 {{!--     {{toJSON data.[0]}} --}}
-    <script type="text/javascript">console.log({{{toJSON data}}})</script>
+    <script type="text/javascript">
+    //console.log({{{toJSON data}}})
+    var a = function(data) {
+        console.log(data);
+    }
+    a({{{toJSON data}}})
+    </script>
 	<div id="table-container">
 		
 		<div id="timeline" style="height: 180px;"></div>

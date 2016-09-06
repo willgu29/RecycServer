@@ -10,9 +10,6 @@ var AWS_PRIVATE_KEY = process.env.AWS_SECRET_ACCESS_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
 console.log('s3 bucket is: ' + S3_BUCKET);
 
-//***********************Routes************************
-router.get('/sign_s3', function(req, res) {
-
     //**********AWS Config***********
   aws.config.update({
     accessKeyId: AWS_ACCESS_KEY,
@@ -20,6 +17,11 @@ router.get('/sign_s3', function(req, res) {
   });
   aws.config.region = 'us-west-2';
   var s3 = new aws.S3();
+
+
+//***********************Routes************************
+router.get('/sign_s3', function(req, res) {
+
 
   //******Capture Request Query******
   const fileName = req.query['file_name'];
@@ -52,5 +54,26 @@ router.get('/sign_s3', function(req, res) {
     
   });
 });
+
+router.get('/getObjects', function(req, res) {
+  //console.log('you are in');
+  const testprefix = req.query['prefix'];
+  console.log('the prefix is', testprefix);
+  var params = {
+  Bucket: S3_BUCKET, /* required */
+  // ContinuationToken: 'STRING_VALUE',
+  // Delimiter: 'STRING_VALUE',
+  // EncodingType: 'url',
+  // FetchOwner: true || false,
+  // MaxKeys: 0,
+  //Prefix: 'STRING_VALUE'//,
+  // StartAfter: 'STRING_VALUE'
+};
+s3.listObjectsV2(params, function(err, data) {
+
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});
+})
 
 module.exports = router;

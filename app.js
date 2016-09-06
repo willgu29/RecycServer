@@ -50,7 +50,7 @@ app.all('*', loggedIn);
 
 function loggedIn(req, res, next) {
     var _=require('underscore');
-    var nonSecurePaths = ['/', '/login', '/auth/login'];
+    var nonSecurePaths = ['/', '/login', '/auth/login', '/analysis/timeline', '/aws/getObjects'];
     if(_.contains(nonSecurePaths, req.path)) return next();
 
     if(req.path == '/login') {
