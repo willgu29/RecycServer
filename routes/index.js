@@ -65,7 +65,7 @@ router.get("/joinSession", function(req, res, next) {
     res.render('joinSession', {layout: false, errorMessage: "This is not a valid Meeting Code"});
   }
   else {
-    console.log('go in');
+    //console.log('go in');
     res.render('joinSession', {layout: false});  
   }
   
