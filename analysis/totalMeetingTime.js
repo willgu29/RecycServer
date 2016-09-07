@@ -1,4 +1,15 @@
-var wordSpace = function (recordingsData){
+//var analysis = {
+//
+//	function wordspace = function (recordingsData) {
+//
+//	};
+//
+//	function length = function (recordingsData) {
+//
+//	};
+//}
+
+var meetingTime = function (recordingsData){
 
 	var fs = require('fs'); //require the file system
 
@@ -86,8 +97,8 @@ var wordSpace = function (recordingsData){
 
 
 	//access part partition via part[personNum][partitionNum]
-	return part;
+	return totalLength;
 
 }
 
-module.exports = wordSpace;
+module.exports = meetingTime;

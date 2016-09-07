@@ -23,10 +23,11 @@ router.post('/login',
 
 router.get('/logout', function (req, res, next) {
   req.logout();
-  res.status(200).json({
-    status: true,
-    message: "Logged out!",
-  });
+  res.redirect("/");
+  // res.status(200).json({
+  //   status: true,
+  //   message: "Logged out!",
+  // });
 });
 
 // check if a user is logged in

@@ -1,0 +1,44 @@
+
+<script>
+
+function myFun() {
+	var jsonData = document.getElementById("jsonData");
+	alert('before ajax request');
+	$.ajax({
+		url: "localhost:4000/analysis/jsonupload",
+		method: "POST",
+		data: JSON.stringify(jsonData),
+		contentType: "application/json",
+		complete: callback
+	});
+
+	function callback() {
+		alert('we did it');
+	};
+	console.log(jsonData);
+	// console.log(JSON.stringify(data.files[0]));
+};
+// var data = document.getElementById("jsonData");
+// var json = data.files;
+
+// var callback = function() {
+// 	alert('done');
+// }
+
+// $.ajax({
+// 	url: "localhost:4000/analysis/jsonupload",
+// 	type: "POST",
+// 	data: JSON.stringify(json),
+// 	contentType: "application/json",
+// 	complete: callback
+// })
+</script>
+
+<h2>Please Only pass in valid JSON of the conversation!</h2>
+
+<form enctype="multipart/form-data" id="jsonData">
+    <input type="file" id="jsonData" multiple onchange="myFun()">
+    <input type="submit" value="Upload photo">
+</form>
+
+

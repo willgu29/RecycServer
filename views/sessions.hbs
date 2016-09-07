@@ -18,45 +18,49 @@
 
 
 <body>
-	
+
 	<div id = "header">
-      
+
         <img id = "logo" src="/images/logo.svg" onclick="window.location='/sessions';"/>
         <h1><span id="home" onclick="window.location='/sessions';">record</span><span id="page"> // meetings</span></h1>
-       
+
+        <a href="/auth/logout" id="logout">logout</a>
         <a href="/createSession" id="start">create</a>
         <a href="/joinSession" id="join">join</a>
-       
+
     </div>
 
 	<div id="table-container">
-	
+
 	<table>
-		
+
 		<tr id="table-header">
-			
+
 			<th>Goal</th>
 			<th>Date</th>
 			<th>Members</th>
-			
+
 		</tr>
 
 		{{#each sessions}}
-		
+
 			<tr onclick="location.href = '/sessions/{{_id}}';">
 
 				<td class="sessionName">{{sessionName}}</td>
 				<td>{{dateCreated}}</td>
-				<td>{{members}}</td>
+				<td>{{#each members}}
+						<h3>{{firstName}} {{lastName}}</h3>
+					{{/each}}
+				</td>
 
 			</tr>
 
 		{{/each}}
 
 	</table>
-	
+
     </div>
-	
+
 	<iframe src="/joinSession"></iframe>
 
 </body>

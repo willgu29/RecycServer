@@ -23,11 +23,52 @@ router.get("/about", function(req, res, next) {
 });
 
 router.get('/meeting/:sessionID', function (req, res, next) {
-  res.render("meeting", {id : req.params.sessionID});
+  console.log('hi');
+  console.log(req.user._id);
+    Session
+    .findOne({"_id" : req.params.sessionID})
+    .populate("members", 'firstName lastName -_id')
+    .exec(function (err, session) {
+      if (err) throw err; //TODO: Change throw to a redirect
+
+      console.log(session);
+      console.log(session.members);
+      res.render("meeting", {layout: false, id : req.params.sessionID, userId: req.user._id, members: session.members});
+    }
+  );
+
+});
+
+router.get('/meeting/:sessionID/speechmaticsUpload', function (req, res, next) {
+  console.log('hi');
+  console.log(req.user._id);
+    Session
+    .findOne({"_id" : req.params.sessionID})
+    .populate("members", 'firstName lastName -_id')
+    .exec(function (err, session) {
+      if (err) throw err; //TODO: Change throw to a redirect
+
+      console.log(session);
+      console.log(session.members);
+      res.render("speechmaticsUpload", {id : req.params.sessionID, userId: req.user._id, members: session.members});
+    }
+  );
+
 });
 
 router.get("/joinSession", function(req, res, next) {
-  res.render('joinSession', {layout: false});
+  var validMeeting = req.query.validMeeting;
+  // console.log(validMeeting);
+  // console.log(typeof(validMeeting));
+  if(validMeeting == 0) {
+    console.log("Not valid meeting code");
+    res.render('joinSession', {layout: false, errorMessage: "This is not a valid Meeting Code"});
+  }
+  else {
+    console.log('go in');
+    res.render('joinSession', {layout: false});  
+  }
+  
 });
 
 router.get("/createSession", function(req, res, next) {

@@ -25,7 +25,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 var hbs = require('hbs');
+
 hbs.registerPartials('./views/partials');
+
+hbs.registerHelper('toJSON', function(obj) {
+  return JSON.stringify(obj);
+});
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -41,6 +47,24 @@ app.use(bodyParser());
 app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.all('*', loggedIn);
+
+function loggedIn(req, res, next) {
+    var _=require('underscore');
+    var nonSecurePaths = ['/', '/login', '/auth/login', '/analysis/timeline', '/aws/getObjects'];
+    if(_.contains(nonSecurePaths, req.path)) return next();
+
+    if(req.path == '/login') {
+      return next();
+    }
+    if (req.user) {
+        next();
+    } else {
+      console.log('redirecting');
+        res.redirect('/login');
+    }
+}
 
 app.use('/', routes);
 app.use('/users', users);
@@ -83,6 +107,7 @@ app.use(function(err, req, res, next) {
 
 /// MONGOOOSE Database Linking ****
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 var connectDBLink = process.env.MONGO_DB || "mongodb://localhost/recyc";
 mongoose.connect(connectDBLink);

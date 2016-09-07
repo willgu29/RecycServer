@@ -12,13 +12,6 @@ function generateCode(){
 router.get("/", function (req, res, next) {
 
   //Finds all sessions this person has CREATED (not joined)
-
-  Session.find({"members" : req.user.id}, function (err, sessions) {
-    res.render("sessions", { layout: false, 
-      "sessions" : sessions
-    });
-  });
-    
   Session
     .find({"members" : req.user.id})
     .populate("members", 'firstName lastName -_id')
@@ -98,11 +91,12 @@ router.post('/join', function (req,res,next){
         //IF ALREADY MEMBER, THEN SHOW
 
         if (err || session == undefined) {
-          res.status(400).json({
-            status: false,
-            session: undefined,
-            message: err,
-          });
+          res.redirect("../joinSession?validMeeting=0");
+          // res.status(400).json({
+          //   status: false,
+          //   session: undefined,
+          //   message: err,
+          // });
 
         } else {
 

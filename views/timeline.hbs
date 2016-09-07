@@ -1,0 +1,92 @@
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="description" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link href="/stylesheets/sessions.css" rel="stylesheet" type="text/css">
+
+    <title>Record | Timeline</title>
+
+    <link rel="shortcut icon" type="image/png" href="/images/logo.svg">
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script type="text/javascript">
+			
+			var a = function(data) {
+        return data;
+    	}
+			
+      google.charts.load('current', {'packages':['timeline']});
+      google.charts.setOnLoadCallback(drawChart);
+			
+      function drawChart() {
+				
+				var l_data = a({{{toJSON data}}});
+				
+        var container = document.getElementById('timeline');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+
+				dataTable.addColumn({ type: 'string', id: 'Person' });
+//				dataTable.addColumn({ type: 'string', id: 'Segment' });
+				dataTable.addColumn({ type: 'date', id: 'Start' });
+				dataTable.addColumn({ type: 'date', id: 'End' });
+
+				var numPerson = 0, talkSegment, numTalkSegments;
+				var numPeople = l_data.length;
+				
+				for (numPerson = 0; numPerson < numPeople; numPerson++) {
+
+					talkSegment = 0;
+					var personTalkSegments = l_data[numPerson].speakers;
+					numTalkSegments = personTalkSegments.length;
+
+					console.log(personTalkSegments);
+					
+					for (talkSegment = 0; talkSegment < numTalkSegments; talkSegment++) {
+
+//						dataTable.addRows([
+//          	[ 'Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ]]);
+						
+						dataTable.addRows([
+
+							[('Person '+ (numPerson + 1).toString()), new Date(0, 0, 0, 0, 0, parseFloat(personTalkSegments[talkSegment].time)), new Date(0, 0, 0, 0, 0, (parseFloat(personTalkSegments[talkSegment].time) + parseFloat(personTalkSegments[talkSegment].duration))) ]]);
+						}
+				}
+
+				chart.draw(dataTable);
+			}
+
+		</script>
+
+</head>
+
+
+<body>
+
+	<div id = "header">
+
+        <img id = "logo" src="/images/logo.svg" onclick="window.location='/sessions';"/>
+        <h1><span id="home" onclick="window.location='/sessions';">record</span><span id="page"> // meetings</span></h1>
+
+        <a href="/auth/logout" id="logout">logout</a>
+        <a href="/createSession" id="start">create</a>
+        <a href="/joinSession" id="join">join</a>
+
+    </div> 
+    
+	<div id="table-container">
+		
+		<div id="timeline" style="height: 380px; width: 100%;"></div>
+		
+  </div>
+
+</body>
+
+</html>
