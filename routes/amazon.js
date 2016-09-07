@@ -11,12 +11,12 @@ var S3_BUCKET = process.env.S3_BUCKET;
 console.log('s3 bucket is: ' + S3_BUCKET);
 
     //**********AWS Config***********
-  aws.config.update({
-    accessKeyId: AWS_ACCESS_KEY,
-    secretAccessKey : AWS_PRIVATE_KEY
-  });
-  aws.config.region = 'us-west-2';
-  var s3 = new aws.S3();
+    aws.config.update({
+    	accessKeyId: AWS_ACCESS_KEY,
+    	secretAccessKey : AWS_PRIVATE_KEY
+    });
+    aws.config.region = 'us-west-2';
+    var s3 = new aws.S3();
 
 
 //***********************Routes************************
@@ -29,23 +29,23 @@ router.get('/sign_s3', function(req, res) {
 
   //Place contents into bucket param
   const s3Params = {
-    Bucket: S3_BUCKET,
-    Key: fileName,
-    Expires: 60,
-    ContentType: fileType,
-    ACL: 'public-read'
+  	Bucket: S3_BUCKET,
+  	Key: fileName,
+  	Expires: 60,
+  	ContentType: fileType,
+  	ACL: 'public-read'
   };
 
   s3.getSignedUrl('putObject', s3Params, function(err, data) {
-    if(err) {
-      console.log(err);
-      return res.end();
-    }
+  	if(err) {
+  		console.log(err);
+  		return res.end();
+  	}
 
     //place signed request and public GET url into response variable
     const returnData = {
-      signedRequest : data,
-      url: 'https://s3-us-west-2.amazonaws.com/' + S3_BUCKET + '/' + fileName
+    	signedRequest : data,
+    	url: 'https://s3-us-west-2.amazonaws.com/' + S3_BUCKET + '/' + fileName
     }
     console.log('Signed Request is: ' + returnData.signedRequest);
     console.log('url is: ' + returnData.url);
@@ -57,22 +57,35 @@ router.get('/sign_s3', function(req, res) {
 
 router.get('/getObjects', function(req, res) {
   //console.log('you are in');
-  const testprefix = req.query['prefix'];
-  console.log('the prefix is', testprefix);
+  const testPrefix = req.query['prefix'];
+  console.log('the prefix is', testPrefix);
   var params = {
-  Bucket: S3_BUCKET, /* required */
+  	Bucket: S3_BUCKET, /* required */
   // ContinuationToken: 'STRING_VALUE',
   // Delimiter: 'STRING_VALUE',
   // EncodingType: 'url',
   // FetchOwner: true || false,
   // MaxKeys: 0,
-  //Prefix: 'STRING_VALUE'//,
+  Prefix: testPrefix//,
   // StartAfter: 'STRING_VALUE'
 };
 s3.listObjectsV2(params, function(err, data) {
 
-  if (err) console.log(err, err.stack); // an error occurred
-  else     console.log(data);           // successful response
+if (err) console.log(err, err.stack); // an error occurred
+else {
+	console.log(data);           // successful response
+	console.log('key is', data.Contents[0].Key);
+
+	var objectParams = {
+		Bucket: S3_BUCKET, /* required */
+		Key: data.Contents[0].Key, /* required */
+	};
+	s3.getObject(objectParams, function(err, objData) {
+		if (err) console.log(err, err.stack); // an error occurred
+		else     console.log(objData.Body.toString());           // successful response
+	});
+
+}
 });
 })
 
