@@ -10,16 +10,23 @@ router.get('/', function (req,res,next){
 
 });
 
-router.post('/login',
-  passport.authenticate('local'),
-  function (req, res, next){
-    if (req.user) {
-      res.redirect("/");
-    } else {
-      res.send("incorrect email or password");
-    }
-  }
-);
+
+router.post('/login', function (req, res, next) {
+  var email = req.body.email;
+  var password = req.body.password;
+  
+  passport.authenticate('local', function (err, user, info) {
+    if (err) {return next (err);}
+    if (!user) {return res.redirect('/login'); }
+    req.logIn(user, function (err) {
+      if (err) { return next(err); }
+      return res.redirect('/');
+    })
+  })(req, res, next);
+});
+
+
+
 
 router.get('/logout', function (req, res, next) {
   req.logout();
