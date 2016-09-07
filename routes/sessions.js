@@ -7,104 +7,106 @@ var rp = require('request-promise');
 
 function generateCode(){
 
-    return Math.floor((Math.random() * 99999) + 10001);
+	return Math.floor((Math.random() * 99999) + 10001);
 }
 
 router.get("/", function (req, res, next) {
 
   //Finds all sessions this person has CREATED (not joined)
   Session
-    .find({"members" : req.user.id})
-    .populate("members", 'firstName lastName -_id')
-    .exec(function (err, sessions) {
-      res.render("sessions", {
-        "sessions" : sessions
-      });
-    })
+  .find({"members" : req.user.id})
+  .populate("members", 'firstName lastName -_id')
+  .exec(function (err, sessions) {
+  	res.render("sessions", {
+  		"sessions" : sessions
+  	});
+  })
 });
 
 router.get("/:sessionID", function (req, res, next) {
-  console.log('whaddup??');
+	console.log('whaddup??');
 
-  rp('http://localhost:3000/aws/getObjects?prefix=57cdbe7dea977ab025fe00b4/speechmatics/')
-    .then(function (data) {
-      console.log(data)
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
+	var sessionID = req.params.sessionID;
+	console.log(sessionID);
+	//'57cdbe7dea977ab025fe00b4
+	rp('http://localhost:3000/aws/getObjects?prefix=' + sessionID + '/speechmatics/')
+	.then(function (data) {
+		console.log(data);
+		Session.findOne({"_id" : sessionID}, function (err, session) {
+			res.render("analysis", { data: JSON.parse(data)	});
+		})
+	})
+	.catch(function (err) {
+		console.log(err);
+	});
 
 
 
-  Session.findOne({"_id" : req.params.sessionID}, function (err, session) {
-    res.render("analysis", {
 
-    });
-  })
 });
 
 router.post('/create', function (req,res,next){
 
-    console.log(req.user);
+	console.log(req.user);
 
-    var newSession = Session();
-    newSession.sessionName = req.body.sessionName;
+	var newSession = Session();
+	newSession.sessionName = req.body.sessionName;
 
-    var currentUserID = req.user.id;
+	var currentUserID = req.user.id;
 
-    newSession.leader = currentUserID;
-    newSession.members.push(currentUserID);
+	newSession.leader = currentUserID;
+	newSession.members.push(currentUserID);
 
-    newSession.save(function (err, newSession){
+	newSession.save(function (err, newSession){
 
-        if (err) {
-          res.status(400).json({
-            status: false,
-            session: undefined,
-            message: err,
-          });
+		if (err) {
+			res.status(400).json({
+				status: false,
+				session: undefined,
+				message: err,
+			});
 
-        } else {
+		} else {
 
-            var newSessionID = SessionID();
-            newSessionID.sessionID = newSession.id;
-            newSessionID.code = generateCode();
+			var newSessionID = SessionID();
+			newSessionID.sessionID = newSession.id;
+			newSessionID.code = generateCode();
 
-            newSessionID.save(function (err, newSession){
+			newSessionID.save(function (err, newSession){
 
-                if (err) {
-                    res.status(400).json({
-                    status: false,
-                    session: undefined,
-                    message: err,
-                  });
+				if (err) {
+					res.status(400).json({
+						status: false,
+						session: undefined,
+						message: err,
+					});
 
-                } else {
+				} else {
 
-                    User.findByIdAndUpdate(
-                        req.user.id,
-                        { $addToSet: {sessions: req.user.id}},
-                        { safe: true, upsert: true, new: true},
+					User.findByIdAndUpdate(
+						req.user.id,
+						{ $addToSet: {sessions: req.user.id}},
+						{ safe: true, upsert: true, new: true},
 
-                        function(err, model) {
-                            console.log(err);
-                        }
-                    );
-                    res.render("newSession", {code : newSession.code});
-                }
-            });
-        }
-    });
+						function(err, model) {
+							console.log(err);
+						}
+						);
+					res.render("newSession", {code : newSession.code});
+				}
+			});
+		}
+	});
 });
 
 router.post('/join', function (req,res,next){
 
-    SessionID.findOne({ 'code': req.body.code }, 'sessionID', function (err, session){
+	SessionID.findOne({ 'code': req.body.code }, 'sessionID', function (err, session){
 
         //IF ALREADY MEMBER, THEN SHOW
 
         if (err || session == undefined) {
-          res.redirect("../joinSession?validMeeting=0");
+        	res.redirect("../joinSession?validMeeting=0");
           // res.status(400).json({
           //   status: false,
           //   session: undefined,
@@ -113,62 +115,62 @@ router.post('/join', function (req,res,next){
 
         } else {
 
-            Session.findByIdAndUpdate(
-                session.sessionID,
-                { $addToSet: {members: req.user.id}},
-                { safe: true, upsert: true, new: true},
+        	Session.findByIdAndUpdate(
+        		session.sessionID,
+        		{ $addToSet: {members: req.user.id}},
+        		{ safe: true, upsert: true, new: true},
 
-                function(err, session) {
+        		function(err, session) {
 
-                    if (err) {
-                      console.log(err);
-                      return;
-                    }
-                    var redirectURL = "/meeting/" + session.id;
+        			if (err) {
+        				console.log(err);
+        				return;
+        			}
+        			var redirectURL = "/meeting/" + session.id;
 
-                    res.redirect(redirectURL);
+        			res.redirect(redirectURL);
 
-                }
-            );
+        		}
+        		);
 
         }
-    });
+      });
 });
 
 router.post("/start/:sessionCode", function (req, res, next) {
-  SessionID.findOne({ 'code' : req.params.sessionCode}, 'sessionID', function (err, sessionID) {
-    if (err) {
-      res.send(err);
-      return;
-    }
+	SessionID.findOne({ 'code' : req.params.sessionCode}, 'sessionID', function (err, sessionID) {
+		if (err) {
+			res.send(err);
+			return;
+		}
 
-    Session.findOne({"_id" : sessionID.sessionID}, function (err, session) {
-      if (err) {
-        res.send(err);
-        return;
-      }
-      session.status = 1;
-      session.save();
+		Session.findOne({"_id" : sessionID.sessionID}, function (err, session) {
+			if (err) {
+				res.send(err);
+				return;
+			}
+			session.status = 1;
+			session.save();
 
-      var redirectURL = "/meeting/" + session.id;
+			var redirectURL = "/meeting/" + session.id;
 
-      res.redirect(redirectURL);
-    });
-  });
+			res.redirect(redirectURL);
+		});
+	});
 });
 
 router.post("/end/:sessionID", function (req, res, next) {
 
-  Session.findOne({"_id" : req.params.sessionID}, function (err, session) {
-    if (err) {
-      res.send(err);
-      return;
-    }
-      session.status = 2;
-      session.save();
+	Session.findOne({"_id" : req.params.sessionID}, function (err, session) {
+		if (err) {
+			res.send(err);
+			return;
+		}
+		session.status = 2;
+		session.save();
 
-      res.redirect("/");
-  });
+		res.redirect("/");
+	});
 });
 
 
