@@ -3,6 +3,7 @@ var router = express.Router();
 var Session = require("../models/Session.js");
 var SessionID = require("../models/SessionID.js");
 var User = require("../models/User.js");
+var request = require('request');
 
 function generateCode(){
 
@@ -23,6 +24,19 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/:sessionID", function (req, res, next) {
+  console.log('whaddup??');
+
+  request('http://localhost:3000/aws/getObjects?prefix=57cdbe7dea977ab025fe00b4/speechmatics/', function (error, response, body) {
+    //console.log('error', error);
+    //console.log('response', response);
+    //console.log('body', body);
+    if (!error && response.statusCode == 200) {
+      console.log(body) // Show the HTML for the Google homepage.
+    }
+  })
+
+
+
   Session.findOne({"_id" : req.params.sessionID}, function (err, session) {
     res.render("analysis", {
 
