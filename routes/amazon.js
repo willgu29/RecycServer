@@ -18,6 +18,8 @@ console.log('s3 bucket is: ' + S3_BUCKET);
     aws.config.region = 'us-west-2';
     var s3 = new aws.S3();
 
+    //Uses bluebird implementation of promise
+    aws.config.setPromisesDependency(require('bluebird'));
 
 //***********************Routes************************
 router.get('/sign_s3', function(req, res) {
@@ -56,46 +58,31 @@ router.get('/sign_s3', function(req, res) {
 });
 
 router.get('/getObjects', function(req, res) {
-  //console.log('you are in');
-  const testPrefix = req.query['prefix'];
-  console.log('the prefix is', testPrefix);
-  var objectListParams = {
-  	Bucket: S3_BUCKET, /* required */
-  	Prefix: testPrefix
-  };
-  s3.listObjectsV2(objectListParams, function(err, objectListData) {
 
-		if (err) console.log(err, err.stack); // an error occurred
+	// Capture 'prefix' query parameter
+	const testPrefix = req.query['prefix'];
+
+	var objectListParams = {
+		Bucket: S3_BUCKET,
+		Prefix: testPrefix
+	};
+
+	s3.listObjectsV2(objectListParams, function(err, objectListData) {
+
+		// If there was an error in getting objects, throw exception
+		if (err) console.log(err, err.stack);
+
+		// We found the list of Objects
 		else {
-			console.log('objectListData:', objectListData);           // successful response
-			//var testVar = objectListData.Contents[0].Key
-			//console.log('key is', testVar);
-			//console.log('filename is', testVar.split('/').pop().split('.')[0]); //extracts file name from <meetingID>/audio/<filename>.<ext>
 
+			// This object contains the list of Data Object's Metadata
+			//console.log('objectListData:', objectListData);
+
+			// Extract the contents of the objectList
 			var contents = objectListData.Contents;
 
-			var outputData = [];
-			//console.log('hihi', contents);
-			// for (var i=0; i < contents.length; i++) {
-				// console.log('1');
-				// var contentKey = contents[i].Key;
-				// var fileName = contentKey.split('/').pop().split('.')[0];  //extracts file name from <meetingID>/audio/<filename>.<ext>);
-				// console.log('filename is:', fileName);
-
-				// s3.getObject({Bucket: S3_BUCKET, Key: contentKey}, function(err, objData) {
-				// 	if (err) console.log(err, err.stack); // an error occurred
-				// 	else {
-				// 		console.log('2');
-				// 		console.log(i);
-				// 		var objReturn = {'user': fileName, 'body': JSON.parse(objData.Body.toString())};
-				// 		//console.log(objReturn);
-				// 		outputData.push(objReturn);
-				// 		console.log(outputData);
-				// 	}
-				// });
-				
-			// }
-
+			// This is the "For" implementation function that will be used to circumvent the synchronous-Async for loop paradigm
+			// https://zackehh.com/handling-synchronous-asynchronous-loops-javascriptnode-js/
 			function syncLoop(iterations, process, exit){  
 				var index = 0,
 				done = false,
@@ -128,41 +115,48 @@ router.get('/getObjects', function(req, res) {
 				loop.next();
 				return loop;
 			}
-			
-			console.log('contents length is: ', contents.length);
+			// Create the array that will store the results of the retrieval operation
+			var outputArr = [];
+
 			syncLoop(contents.length, function(loop) {
-				console.log('1');
+
+				// Capture loop iteration number
 				var i = loop.iteration();
-				console.log('i is: ', i);
+
+				// Capture the 'i'th key in the contents array
 				var contentKey = contents[i].Key;
-				var fileName = contentKey.split('/').pop().split('.')[0];  //extracts file name from <meetingID>/audio/<filename>.<ext>);
-				console.log('filename is:', fileName);
 
-				s3.getObject({Bucket: S3_BUCKET, Key: contentKey}, function(err, objData) {
-					if (err) console.log(err, err.stack); // an error occurred
-					else {
-						console.log('2');
-						console.log(i);
-						var objReturn = {'user': fileName, 'body': JSON.parse(objData.Body.toString())};
-						//console.log(objReturn);
-						outputData.push(objReturn);
-						console.log(outputData);
-					}
-				});
-				loop.next();
+				// Create a getObjectPromise that will only run the next loop iteration once the promise is fulfilled
+				var getObjectPromise = s3.getObject({Bucket: S3_BUCKET, Key: contentKey}).promise();
+
+				// Create the function that will return on object retrieval
+				getObjectPromise.then(function(data) {
+
+					// Extract the filename from the 'key' string.
+					// Extracts file name from <meetingID>/audio/<filename>.<ext>
+					var fileName = contentKey.split('/').pop().split('.')[0];
+
+					// Extract Body content from the data payload.
+					// Initally returned as a buffer.  So, Buffer.toString() stringifies it.
+					// JSON.parse puts this in correct format for display
+					var dataBody = JSON.parse(data.Body.toString());
+
+					// Create bundling object from acquired data
+					var objReturn = {'user': fileName, 'body': dataBody};
+
+					// Push this object back into the output Array
+					outputArr.push(objReturn);
+
+					// All functions have been pushed for this object.  Therefore, move onto next Object
+					loop.next();
+				});				
 			}, function() {
-				console.log('done!');
+
+				// After finishing all data retrieval, send this as a HTTP response
+				res.send(JSON.stringify(outputArr));
 			});			
-
-
-
-
-
-
-
-
-}
-});
+		}
+	});
 });
 
 module.exports = router;
