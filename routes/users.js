@@ -36,11 +36,12 @@ router.post('/', function (req, res, next) {
       });
         
     } else {
-      res.status(201).json({
-        status:true,
-        user: newUser,
-        message:"Account successfully created!",
-      });
+      res.redirect('/');
+      // res.status(201).json({
+      //   status:true,
+      //   user: newUser,
+      //   message:"Account successfully created!",
+      // });
     }
 });
 
