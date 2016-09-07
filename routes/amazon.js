@@ -52,41 +52,117 @@ router.get('/sign_s3', function(req, res) {
 
     res.send(JSON.stringify(returnData));
     
-  });
+});
 });
 
 router.get('/getObjects', function(req, res) {
   //console.log('you are in');
   const testPrefix = req.query['prefix'];
   console.log('the prefix is', testPrefix);
-  var params = {
+  var objectListParams = {
   	Bucket: S3_BUCKET, /* required */
-  // ContinuationToken: 'STRING_VALUE',
-  // Delimiter: 'STRING_VALUE',
-  // EncodingType: 'url',
-  // FetchOwner: true || false,
-  // MaxKeys: 0,
-  Prefix: testPrefix//,
-  // StartAfter: 'STRING_VALUE'
-};
-s3.listObjectsV2(params, function(err, data) {
+  	Prefix: testPrefix
+  };
+  s3.listObjectsV2(objectListParams, function(err, objectListData) {
 
-if (err) console.log(err, err.stack); // an error occurred
-else {
-	console.log(data);           // successful response
-	console.log('key is', data.Contents[0].Key);
-
-	var objectParams = {
-		Bucket: S3_BUCKET, /* required */
-		Key: data.Contents[0].Key, /* required */
-	};
-	s3.getObject(objectParams, function(err, objData) {
 		if (err) console.log(err, err.stack); // an error occurred
-		else     console.log(objData.Body.toString());           // successful response
-	});
+		else {
+			console.log('objectListData:', objectListData);           // successful response
+			//var testVar = objectListData.Contents[0].Key
+			//console.log('key is', testVar);
+			//console.log('filename is', testVar.split('/').pop().split('.')[0]); //extracts file name from <meetingID>/audio/<filename>.<ext>
+
+			var contents = objectListData.Contents;
+
+			var outputData = [];
+			//console.log('hihi', contents);
+			// for (var i=0; i < contents.length; i++) {
+				// console.log('1');
+				// var contentKey = contents[i].Key;
+				// var fileName = contentKey.split('/').pop().split('.')[0];  //extracts file name from <meetingID>/audio/<filename>.<ext>);
+				// console.log('filename is:', fileName);
+
+				// s3.getObject({Bucket: S3_BUCKET, Key: contentKey}, function(err, objData) {
+				// 	if (err) console.log(err, err.stack); // an error occurred
+				// 	else {
+				// 		console.log('2');
+				// 		console.log(i);
+				// 		var objReturn = {'user': fileName, 'body': JSON.parse(objData.Body.toString())};
+				// 		//console.log(objReturn);
+				// 		outputData.push(objReturn);
+				// 		console.log(outputData);
+				// 	}
+				// });
+				
+			// }
+
+			function syncLoop(iterations, process, exit){  
+				var index = 0,
+				done = false,
+				shouldExit = false;
+				var loop = {
+						next:function(){
+							if(done){
+								if(shouldExit && exit){
+									return exit(); // Exit if we're done
+								}
+							}
+							// If we're not finished
+							if(index < iterations){
+								index++; // Increment our index
+								process(loop); // Run our process, pass in the loop
+							// Otherwise we're done
+							} else {
+								done = true; // Make sure we say we're done
+								if(exit) exit(); // Call the callback on exit
+							}
+						},
+					iteration:function(){
+						return index - 1; // Return the loop number we're on
+					},
+					break:function(end){
+						done = true; // End the loop
+						shouldExit = end; // Passing end as true means we still call the exit callback
+					}
+				};
+				loop.next();
+				return loop;
+			}
+			
+			console.log('contents length is: ', contents.length);
+			syncLoop(contents.length, function(loop) {
+				console.log('1');
+				var i = loop.iteration();
+				console.log('i is: ', i);
+				var contentKey = contents[i].Key;
+				var fileName = contentKey.split('/').pop().split('.')[0];  //extracts file name from <meetingID>/audio/<filename>.<ext>);
+				console.log('filename is:', fileName);
+
+				s3.getObject({Bucket: S3_BUCKET, Key: contentKey}, function(err, objData) {
+					if (err) console.log(err, err.stack); // an error occurred
+					else {
+						console.log('2');
+						console.log(i);
+						var objReturn = {'user': fileName, 'body': JSON.parse(objData.Body.toString())};
+						//console.log(objReturn);
+						outputData.push(objReturn);
+						console.log(outputData);
+					}
+				});
+				loop.next();
+			}, function() {
+				console.log('done!');
+			});			
+
+
+
+
+
+
+
 
 }
 });
-})
+});
 
 module.exports = router;
