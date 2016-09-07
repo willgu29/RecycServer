@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var router = express.Router();
 var wordspace = require('../analysis/test.js');
@@ -87,6 +88,9 @@ router.get('/emotion', function (req, res, next) {
 });
 
 router.get('/timeline', function (req,res,next){
+
+  // console.log(process.env.AWS_ACCESS_KEY_ID);
+  
   firstJSON = getConfig('../adam_1_2.json');
   secondJSON = getConfig('../will_1_2.json');
   thirdJSON = getConfig('../tanuj_1_2.json');
