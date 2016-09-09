@@ -50,11 +50,13 @@ router.get('/wordspace', function (req, res, next) {
         "name" : people[i],
       });
     }
+	
+		res.render('analysis', {layout: false});
 
-    res.render("wordspaceExample", {
-      meetingLength: meetingLength,
-      speakingTime: speakingTime,
-    });
+//    res.render("wordspaceExample", {
+//      meetingLength: meetingLength,
+//      speakingTime: speakingTime,
+//    });
 });
 
 router.post("/wordspace", function (req, res, next) {

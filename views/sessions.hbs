@@ -49,9 +49,15 @@
 
 				<td class="sessionName">{{sessionName}}</td>
 				<td>{{dateCreated}}</td>
-				<td>{{#each members}}
-						<h3>{{firstName}} {{lastName}}</h3>
+				<td class="sessionMembers">
+				
+					{{#each members}}
+						{{firstName}} {{lastName}}
+						
+						{{#unless @last}},{{/unless}}
+						
 					{{/each}}
+					
 				</td>
 
 			</tr>
