@@ -27,24 +27,27 @@ router.get("/:sessionID", function (req, res, next) {
 	console.log('whaddup??');
 
 	var sessionID = req.params.sessionID;
-	console.log(sessionID);
+	console.log('sessionID',sessionID);
 	//'57cdbe7dea977ab025fe00b4
 	rp('http://localhost:3000/aws/getObjects?prefix=' + sessionID + '/speechmatics/')
-	.then(function (data) {
-		console.log(data);
+	.then(function (sessionData) {
+		console.log('sessionData',sessionData);
 		Session.findOne({"_id" : sessionID}, function (err, session) {
 			if (err) {res.redirect('../');}
-			//put all analysis code here
 			
+			//put all analysis code here
+			rp('http://localhost:3000/analysis/wordspace')
+			.then(function(wordspaceData) {
+				//console.log('wordspaceData',wordspaceData);
+
+				res.render("analysis", {
+					sessionData: JSON.parse(sessionData),
+					wordspaceData: JSON.parse(wordspaceData)
+				});
+			});
 
 
 
-
-
-
-
-
-			res.render("analysis", { data: JSON.parse(data)	});
 		})
 	})
 	.catch(function (err) {

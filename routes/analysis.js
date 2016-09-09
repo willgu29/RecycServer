@@ -35,7 +35,7 @@ router.get('/wordspace', function (req, res, next) {
 	  var recordings = ['./analysis/adam_1_1.json', './analysis/tanuj_1_1.json', './analysis/will_1_1.json'];
 
     var data = wordspace(recordings);//session.recordingsData);
-    console.log('data: ', data);
+    //console.log('data: ', data);
     var meetingLength = meetingTime(recordings);
     console.log(meetingLength);
     var people = ['Adam', 'Tanuj', 'Will'];
