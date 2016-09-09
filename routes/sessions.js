@@ -31,26 +31,44 @@ router.get("/:sessionID", function (req, res, next) {
 	//'57cdbe7dea977ab025fe00b4
 	rp('http://localhost:3000/aws/getObjects?prefix=' + sessionID + '/speechmatics/')
 	.then(function (sessionData) {
-		console.log('sessionData',sessionData);
+		//console.log('sessionData',sessionData);
 		Session.findOne({"_id" : sessionID}, function (err, session) {
 			if (err) {res.redirect('../');}
 			
-			//put all analysis code here
-			rp('http://localhost:3000/analysis/wordspace')
+			var options = {
+			    method: 'POST',
+			    uri: 'http://localhost:3000/analysis/wordspace',
+			    body: {
+			        testData: sessionData
+			    },
+			    json: true // Automatically stringifies the body to JSON 
+			};
+			 
+			rp(options)
 			.then(function(wordspaceData) {
 				//console.log('wordspaceData',wordspaceData);
-
-				res.render("analysis", {
-					sessionData: JSON.parse(sessionData),
-					wordspaceData: JSON.parse(wordspaceData)
-				});
+				console.log('it works!');
+				//console.log('sessionData',sessionData);
+				//console.log('wordspaceData', wordspaceData);
+				// res.render("analysis", {
+				// 	sessionData: JSON.parse(sessionData),
+				// 	wordspaceData: wordspaceData
+				// });
 			});
+			// //put all analysis code here
+			// rp('http://localhost:3000/analysis/wordspace')
+			// .then(function(wordspaceData) {
+			// 	//console.log('wordspaceData',wordspaceData);
 
-
-
-		})
+			// 	res.render("analysis", {
+			// 		sessionData: JSON.parse(sessionData),
+			// 		wordspaceData: JSON.parse(wordspaceData)
+			// 	});
+			// });
+		});
 	})
 	.catch(function (err) {
+		console.log('err!!');
 		console.log(err);
 	});
 

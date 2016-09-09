@@ -29,9 +29,10 @@ router.get('/', function (req,res,next){
 	res.send("hello");
 });
 
-router.get('/wordspace', function (req, res, next) {
+router.post('/wordspace', function (req, res, next) {
 
 
+    console.log('testingData: ', req.body.testData);
 	  var recordings = ['./analysis/adam_1_1.json', './analysis/tanuj_1_1.json', './analysis/will_1_1.json'];
 
     var data = wordspace(recordings);//session.recordingsData);
@@ -67,12 +68,12 @@ router.get('/wordspace', function (req, res, next) {
 //    });
 });
 
-router.post("/wordspace", function (req, res, next) {
-  var recordings = req.body.recordings;
-  var data = wordspace(recordings);
-  var person  = data[0][0];
-  res.send(JSON.stringify(data, null, 3));
-});
+// router.post("/wordspace", function (req, res, next) {
+//   var recordings = req.body.recordings;
+//   var data = wordspace(recordings);
+//   var person  = data[0][0];
+//   res.send(JSON.stringify(data, null, 3));
+// });
 
 router.get('/jsonupload', function (req, res, next) {
 	res.render("jsonUpload");
