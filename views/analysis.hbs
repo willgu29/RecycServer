@@ -55,10 +55,24 @@
     </div> 
             sessionData <br>
 
-    {{{toJSON sessionData}}}
+    {{!-- {{{toJSON sessionData}}} --}}
 <br><br><br>
-        wordspaceData <br>
-    {{{toJSON wordspaceData}}}
+{{!--         wordspaceData <br>
+    {{{toJSON wordspaceData}}} --}}
+
+    Total Meeting Time: {{meetingLength}} seconds
+
+    <br><br>
+    Individual <br>
+    {{toJSON individualX}} <br>
+    {{toJSON individualY}} <br> <br> <br>
+    Gender <br>
+    {{toJSON genderX}} <br>
+    {{toJSON genderY}} <br> <br> <br>
+    Ethnicity <br>
+    {{toJSON ethnicityX}} <br>
+    {{toJSON ethnicityY}} <br>
+
 
 	<div id="table-container">
 		

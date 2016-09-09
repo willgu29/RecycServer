@@ -52,9 +52,55 @@ router.get("/:sessionID", function (req, res, next) {
 				//res.send(wordspaceData);
 				//console.log('sessionData',sessionData);
 				//console.log('wordspaceData', wordspaceData);
+				
+				var speakingStats = wordspaceData.speakingStats;
+				var individualX = [];
+				var individualY = [];
+
+				for (var i=0; i< speakingStats.length; i++) {
+					individualX[i] = speakingStats[i].name;
+					individualY[i] = speakingStats[i].wordspaceTime;
+				}
+
+				var genderX = ['Male', 'Female'];
+				var genderY = [0,0];
+
+				for (var i=0; i< speakingStats.length; i++) {
+					if(speakingStats[i].gender=='m') {
+						genderY[0] += speakingStats[i].wordspaceTime;
+					} else if(speakingStats[i].gender=='f') {
+						genderY[1] += speakingStats[i].wordspaceTime;
+					} else {
+						console.log('error!!');
+					}
+				}
+
+				var ethnicityX = [];
+				var ethnicityY = [];
+
+				for (var i=0; i< speakingStats.length; i++) {
+					var index = ethnicityX.indexOf(speakingStats[i].ethnicity);
+					
+					if (index == -1) { //add to array
+						ethnicityX.push(speakingStats[i].ethnicity);
+						var indexNew = ethnicityX.indexOf(speakingStats[i].ethnicity);
+						ethnicityY[indexNew] = 0;
+						ethnicityY[indexNew] += speakingStats[i].wordspaceTime;
+					} else {
+						ethnicityY[index] += speakingStats[i].wordspaceTime;
+					}
+				}
+
 				res.render("analysis", {
 					sessionData: sessionData,
-					wordspaceData: wordspaceData
+					wordspaceData: wordspaceData,
+					meetingLength: wordspaceData.inputJSONData[0].body.job.duration,
+					individualX: individualX,
+					individualY: individualY,
+					genderX: genderX,
+					genderY: genderY,
+					ethnicityX: ethnicityX,
+					ethnicityY: ethnicityY
 				});
 			});
 			// //put all analysis code here

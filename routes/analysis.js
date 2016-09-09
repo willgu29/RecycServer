@@ -82,6 +82,7 @@ router.post('/wordspace', function (req, res, next) {
       });
     }
 
+    
 	 
     //console.log('speakingTime', speakingTime);
     res.send({speakingStats: speakingStats, data: data, inputJSONData: inputJSONData, recordings: recordings});
