@@ -91,6 +91,10 @@ router.post("/upload", function(req, res, next) {
   console.log("upload");
 });
 
+router.get('/error', function(req, res, next) {
+  res.render('error');
+});
+
 function loggedIn(req, res, next) {
     if (req.user) {
         next();

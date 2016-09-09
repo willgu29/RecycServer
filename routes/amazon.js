@@ -8,6 +8,7 @@ var aws = require('aws-sdk');
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
 var AWS_PRIVATE_KEY = process.env.AWS_SECRET_ACCESS_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
+var User = require("../models/User.js");
 console.log('s3 bucket is: ' + S3_BUCKET);
 
     //**********AWS Config***********
@@ -80,6 +81,7 @@ router.get('/getObjects', function(req, res) {
 
 			// Extract the contents of the objectList
 			var contents = objectListData.Contents;
+			console.log('contents is: ',contents)
 
 			// This is the "For" implementation function that will be used to circumvent the synchronous-Async for loop paradigm
 			// https://zackehh.com/handling-synchronous-asynchronous-loops-javascriptnode-js/
@@ -122,6 +124,7 @@ router.get('/getObjects', function(req, res) {
 
 				// Capture loop iteration number
 				var i = loop.iteration();
+				console.log('i is: ', i);
 
 				// Capture the 'i'th key in the contents array
 				var contentKey = contents[i].Key;
@@ -141,14 +144,28 @@ router.get('/getObjects', function(req, res) {
 					// JSON.parse puts this in correct format for display
 					var dataBody = JSON.parse(data.Body.toString());
 
-					// Create bundling object from acquired data
-					var objReturn = {'user': fileName, 'body': dataBody};
+					//Get User Statistics
+					var userProfile = {};
+					User.findById(fileName, function (err, myDocument) {
+  						if (err) {console.log('error in finding user!!'); throw (err);}
+  						userProfile.name = myDocument.firstName;
+  						userProfile.age = myDocument.age;
+  						userProfile.ethnicity = myDocument.ethnicity;
+  						userProfile.gender = myDocument.gender;
+  						console.log('userprofile is: ',userProfile);
+						
+						// Create bundling object from acquired data
+						var objReturn = {'user': userProfile, 'body': dataBody};
 
-					// Push this object back into the output Array
-					outputArr.push(objReturn);
+						// Push this object back into the output Array
+						outputArr.push(objReturn);
 
-					// All functions have been pushed for this object.  Therefore, move onto next Object
-					loop.next();
+						// All functions have been pushed for this object.  Therefore, move onto next Object
+						loop.next();
+					});
+					
+
+
 				});				
 			}, function() {
 

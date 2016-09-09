@@ -15,12 +15,12 @@ var meetingTime = function (recordingsData){
 
 	var fileArr = recordingsData; //['./adam_1_2.json', './will_1_2.json', './tanuj_1_2.json'];
 
-	var fileCont = [];
+	var fileCont = fileArr;
 
-	for (var i=0;i<fileArr.length;i++) {
-		fileCont.push(JSON.parse(fs.readFileSync(fileArr[i], 'utf8')));  //Read file JSON: http://bit.ly/29bSF9J
-		//console.log(fileCont[i].job.name);
-	}
+	// for (var i=0;i<fileArr.length;i++) {
+	// 	fileCont.push(JSON.parse(fs.readFileSync(fileArr[i], 'utf8')));  //Read file JSON: http://bit.ly/29bSF9J
+	// 	//console.log(fileCont[i].job.name);
+	// }
 
 //	var words = obj.words;
 	var words = [];
@@ -61,7 +61,7 @@ var meetingTime = function (recordingsData){
 		var indvWords = words[numPerson];
 
 		for (word in indvWords) { //iterate through each word
-			console.log(numPerson + '   ' + word)
+			//console.log(numPerson + '   ' + word)
 			var indvWord = indvWords[word];
 			//console.log(indvWord);
 			//console.log(indvWord);
