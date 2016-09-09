@@ -33,6 +33,17 @@ router.get("/:sessionID", function (req, res, next) {
 	.then(function (data) {
 		console.log(data);
 		Session.findOne({"_id" : sessionID}, function (err, session) {
+			if (err) {res.redirect('../');}
+			//put all analysis code here
+			
+
+
+
+
+
+
+
+
 			res.render("analysis", { data: JSON.parse(data)	});
 		})
 	})

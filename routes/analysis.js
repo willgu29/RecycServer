@@ -31,11 +31,13 @@ router.get('/', function (req,res,next){
 
 router.get('/wordspace', function (req, res, next) {
 
+
 	  var recordings = ['./analysis/adam_1_1.json', './analysis/tanuj_1_1.json', './analysis/will_1_1.json'];
 
     var data = wordspace(recordings);//session.recordingsData);
+    console.log('data: ', data);
     var meetingLength = meetingTime(recordings);
-
+    console.log(meetingLength);
     var people = ['Adam', 'Tanuj', 'Will'];
 
     var speakingTime = [];
@@ -49,9 +51,15 @@ router.get('/wordspace', function (req, res, next) {
         "wordspace" : format,
         "name" : people[i],
       });
+
     }
-	
-		res.render('analysis', {layout: false});
+	 
+    console.log('speakingTime', speakingTime);
+		res.send({
+      wordspaceData: data,
+      wordspaceMeetingLength: meetingLength,
+      wordspaceSpeakingTime: speakingTime
+    });
 
 //    res.render("wordspaceExample", {
 //      meetingLength: meetingLength,

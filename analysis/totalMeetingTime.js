@@ -61,7 +61,7 @@ var meetingTime = function (recordingsData){
 		var indvWords = words[numPerson];
 
 		for (word in indvWords) { //iterate through each word
-			console.log(numPerson + '   ' + word)
+			//console.log(numPerson + '   ' + word)
 			var indvWord = indvWords[word];
 			//console.log(indvWord);
 			//console.log(indvWord);
