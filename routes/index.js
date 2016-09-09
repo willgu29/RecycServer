@@ -50,7 +50,7 @@ router.get('/meeting/:sessionID/speechmaticsUpload', function (req, res, next) {
 
       console.log(session);
       console.log(session.members);
-      res.render("speechmaticsUpload", {id : req.params.sessionID, userId: req.user._id, members: session.members});
+      res.render("speechmaticsUpload", {layour: false, id : req.params.sessionID, userId: req.user._id, members: session.members});
     }
   );
 
