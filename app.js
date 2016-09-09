@@ -48,18 +48,20 @@ app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.all('*', loggedIn);
+// app.all('*', loggedIn);
 
+
+// http://stackoverflow.com/questions/12921658/use-specific-middleware-in-express-for-all-paths-except-a-specific-one
 function loggedIn(req, res, next) {
     var _=require('underscore');
-    var nonSecurePaths = ['/', '/login', '/auth/login'];
+    var nonSecurePaths = ['/', '/login', '/auth/login', '/analysis/timeline', '/aws/getObjects', '/createAccount'];
     if(_.contains(nonSecurePaths, req.path)) return next();
 
     if(req.path == '/login') {
       return next();
     }
     if (req.user) {
-        next();
+        return next();
     } else {
       console.log('redirecting');
         res.redirect('/login');
