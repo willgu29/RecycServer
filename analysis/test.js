@@ -3,7 +3,7 @@ var wordSpace = function (recordingsData){
 	var fs = require('fs'); //require the file system
 
 	var fileArr = recordingsData; //['./adam_1_2.json', './will_1_2.json', './tanuj_1_2.json'];
-
+	//console.log('recordingsData', recordingsData.length);
 	var fileCont = fileArr;
 
 	// for (var i=0;i<fileArr.length;i++) {
