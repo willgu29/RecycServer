@@ -35,6 +35,7 @@ router.get("/:sessionID", function (req, res, next) {
 		Session.findOne({"_id" : sessionID}, function (err, session) {
 			if (err) {res.redirect('../');}
 			console.log('sessionData',sessionData);
+			
 			var options = {
 			    method: 'POST',
 			    uri: 'http://localhost:3000/analysis/wordspace',

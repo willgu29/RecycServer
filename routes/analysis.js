@@ -54,25 +54,34 @@ router.post('/wordspace', function (req, res, next) {
     //console.log('data: ', data);
     var meetingLength = meetingTime(recordings);
     console.log('meeting length: ', meetingLength);
-    var people = ['Adam', 'Tanuj', 'Will'];
+    //var people = ['Steve', 'Bill', 'Will'];
 
-    var speakingTime = [];
+    var people = [];
+
+    for (var i=0; i<inputJSONData.length; i++) {
+      people[i] = inputJSONData[i].user;
+    }
+
+    var speakingStats = [];
 	
     for (var i = 0; i < data.length; i++) {
       var personData = data[i][0];
       var speakingPercent = (personData.duration/meetingLength)*100;
       var format = parseFloat(Math.round(speakingPercent * 100) / 100).toFixed(2);
 
-      speakingTime.push({
-        "totalTimeSpoken": personData.duration,
+      speakingStats.push({
+        "wordspaceTime": personData.duration,
         "wordspacePercentage" : format,
-        "name" : people[i],
+        "name" : people[i].name,
+        "gender": people[i].gender,
+        "ethnicity": people[i].ethnicity,
+        "age": people[i].age
       });
     }
 
 	 
     //console.log('speakingTime', speakingTime);
-    res.send({speakingTime: speakingTime, data: data, inputJSONData: inputJSONData, recordings: recordings});
+    res.send({speakingStats: speakingStats, data: data, inputJSONData: inputJSONData, recordings: recordings});
 		// res.send({
   //     wordspaceData: data,
   //     wordspaceMeetingLength: meetingLength,
