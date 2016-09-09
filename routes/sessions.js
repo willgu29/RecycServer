@@ -31,10 +31,10 @@ router.get("/:sessionID", function (req, res, next) {
 	//'57cdbe7dea977ab025fe00b4
 	rp('http://localhost:3000/aws/getObjects?prefix=' + sessionID + '/speechmatics/')
 	.then(function (sessionData) {
-		//console.log('sessionData',sessionData);
+		
 		Session.findOne({"_id" : sessionID}, function (err, session) {
 			if (err) {res.redirect('../');}
-			
+			console.log('sessionData',sessionData);
 			var options = {
 			    method: 'POST',
 			    uri: 'http://localhost:3000/analysis/wordspace',
@@ -48,6 +48,7 @@ router.get("/:sessionID", function (req, res, next) {
 			.then(function(wordspaceData) {
 				//console.log('wordspaceData',wordspaceData);
 				console.log('it works!');
+				// res.send(wordspaceData);
 				//console.log('sessionData',sessionData);
 				//console.log('wordspaceData', wordspaceData);
 				// res.render("analysis", {

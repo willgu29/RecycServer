@@ -30,15 +30,30 @@ router.get('/', function (req,res,next){
 });
 
 router.post('/wordspace', function (req, res, next) {
+  console.log('hi');
+  console.log(req.body.testData);
+    var inputJSONData = req.body.testData;//req.body.testData;
 
+    // inputJSONData = JSON.parse(inputJSONData);
+    // console.log('first is: ',inputJSONData[0].body)
+    // console.log('first is: ',typeof(inputJSONData[0].body))
+    //console.log('Input Data: ', inputJSONData.length);
+    var recordings = [];
+    // recordings[0] = inputJSONData[0].body;
+    // console.log('recordings is: ',recordings[0])
+    // console.log('recordings is: ',typeof(recordings[0]));
 
-    console.log('testingData: ', req.body.testData);
-	  var recordings = ['./analysis/adam_1_1.json', './analysis/tanuj_1_1.json', './analysis/will_1_1.json'];
+    for (var i = 0; i<inputJSONData.length; i++) {
+      recordings[i] = inputJSONData[i].body;
+      //console.log('recording',i,'is: ',JSON.parse(JSON.stringify(recordings[i])));
+    }
 
+	  //var recordings = ['./analysis/adam_1_1.json', './analysis/tanuj_1_1.json', './analysis/will_1_1.json'];
+    // console.log('recordings: ', recordings);
     var data = wordspace(recordings);//session.recordingsData);
     //console.log('data: ', data);
     var meetingLength = meetingTime(recordings);
-    console.log(meetingLength);
+    console.log('meeting length: ', meetingLength);
     var people = ['Adam', 'Tanuj', 'Will'];
 
     var speakingTime = [];
@@ -49,23 +64,20 @@ router.post('/wordspace', function (req, res, next) {
       var format = parseFloat(Math.round(speakingPercent * 100) / 100).toFixed(2);
 
       speakingTime.push({
-        "wordspace" : format,
+        "totalTimeSpoken": personData.duration,
+        "wordspacePercentage" : format,
         "name" : people[i],
       });
-
     }
-	 
-    console.log('speakingTime', speakingTime);
-		res.send({
-      wordspaceData: data,
-      wordspaceMeetingLength: meetingLength,
-      wordspaceSpeakingTime: speakingTime
-    });
 
-//    res.render("wordspaceExample", {
-//      meetingLength: meetingLength,
-//      speakingTime: speakingTime,
-//    });
+	 
+    //console.log('speakingTime', speakingTime);
+    res.send({speakingTime: speakingTime, data: data, inputJSONData: inputJSONData, recordings: recordings});
+		// res.send({
+  //     wordspaceData: data,
+  //     wordspaceMeetingLength: meetingLength,
+  //     wordspaceSpeakingTime: speakingTime
+  //   });
 });
 
 // router.post("/wordspace", function (req, res, next) {
