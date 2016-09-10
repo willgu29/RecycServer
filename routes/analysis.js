@@ -30,9 +30,10 @@ router.get('/', function (req,res,next){
 });
 
 router.post('/wordspace', function (req, res, next) {
-  console.log('hi');
+	
   console.log(req.body.testData);
-    var inputJSONData = req.body.testData;//req.body.testData;
+	
+    var inputJSONData = req.body.testData;
 
     // inputJSONData = JSON.parse(inputJSONData);
     // console.log('first is: ',inputJSONData[0].body)
@@ -81,17 +82,68 @@ router.post('/wordspace', function (req, res, next) {
         "age": people[i].age
       });
     }
-
-    
-	 
+	
     //console.log('speakingTime', speakingTime);
+	
     res.send({speakingStats: speakingStats, data: data, inputJSONData: inputJSONData, recordings: recordings});
+	
 		// res.send({
   //     wordspaceData: data,
   //     wordspaceMeetingLength: meetingLength,
   //     wordspaceSpeakingTime: speakingTime
   //   });
 });
+
+
+
+
+
+router.get('/wordspace', function (req, res, next) {
+
+//	  var recordings = ['./analysis/adam_1_1.json', './analysis/tanuj_1_1.json', './analysis/will_1_1.json'];
+//
+//    var data = wordspace(recordings);//session.recordingsData);
+//    var meetingLength = meetingTime(recordings);
+//
+//    var people = ['Adam', 'Tanuj', 'Will'];
+//
+//    var speakingTime = [];
+//	
+//    for (var i = 0; i < data.length; i++) {
+//      var personData = data[i][0];
+//      var speakingPercent = (personData.duration/meetingLength)*100;
+//      var format = parseFloat(Math.round(speakingPercent * 100) / 100).toFixed(2);
+//
+//      speakingTime.push({
+//        "wordspace" : format,
+//        "name" : people[i],
+//      });
+//    }
+	
+		res.render('analysis', {layout: false});
+
+//    res.render("wordspaceExample", {
+//      meetingLength: meetingLength,
+//      speakingTime: speakingTime,
+//    });
+});
+
+//router.post("/wordspace", function (req, res, next) {
+//  var recordings = req.body.recordings;
+//  var data = wordspace(recordings);
+//  var person  = data[0][0];
+//  res.send(JSON.stringify(data, null, 3));
+//});
+
+
+
+
+
+
+
+
+
+
 
 // router.post("/wordspace", function (req, res, next) {
 //   var recordings = req.body.recordings;
