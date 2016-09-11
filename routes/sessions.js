@@ -57,7 +57,7 @@ router.get("/:sessionID", function (req, res, next) {
 				var individualX = [];
 				var individualY = [];
 				var individual = [];
-
+				console.log('individual',typeof(individual));
 				for (var i=0; i< speakingStats.length; i++) {
 					individualX[i] = speakingStats[i].name;
 					individualY[i] = speakingStats[i].wordspaceTime;
@@ -67,7 +67,7 @@ router.get("/:sessionID", function (req, res, next) {
 					individual.push([individualX[i],individualY[i]]);
 				}
 
-				console.log('individual',individual);
+				console.log('individual',typeof(individual));
 
 
 				var genderX = ['Male', 'Female'];
@@ -85,7 +85,7 @@ router.get("/:sessionID", function (req, res, next) {
 				}
 
 				for (var i=0; i<genderX.length; i++) {
-					gender.push([individualX[i],individualY[i]]);
+					gender.push([genderX[i],genderY[i]]);
 				}
 
 				console.log('gender',gender);
