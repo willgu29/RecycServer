@@ -36,7 +36,36 @@
 
         chart.draw(data, options);
       }
+
+    google.charts.setOnLoadCallback(drawChart2);
+      function drawChart2() {
+        console.log('hi');
+
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn('string', 'Topping');
+        data2.addColumn('number', 'Slices');
+        data2.addRows([
+          ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2]
+        ]);
+
+        var options2 = {
+          title: 'Percent Spoken'
+        };
+
+        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+        chart2.draw(data2, options2);
+      }
     </script>
+
+    //   <script type="text/javascript">
+    //   google.charts.load('current', {'packages':['corechart']});
+
+    // </script>
 
 </head>
 
@@ -63,7 +92,9 @@
     Total Meeting Time: {{meetingLength}} seconds
 
     <br><br>
-    Individual <br>
+{{toJSON individual}}
+
+{{!--     Individual <br>
     {{toJSON individualX}} <br>
     {{toJSON individualY}} <br> <br> <br>
     Gender <br>
@@ -71,7 +102,7 @@
     {{toJSON genderY}} <br> <br> <br>
     Ethnicity <br>
     {{toJSON ethnicityX}} <br>
-    {{toJSON ethnicityY}} <br>
+    {{toJSON ethnicityY}} <br> --}}
 
 
 	<div id="table-container">
@@ -79,6 +110,8 @@
 		<div id="piechart" style="width: 50%; height: 200px;"></div>
 		
   </div>
+
+
 
 </body>
 
