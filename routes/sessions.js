@@ -56,14 +56,23 @@ router.get("/:sessionID", function (req, res, next) {
 				var speakingStats = wordspaceData.speakingStats;
 				var individualX = [];
 				var individualY = [];
-
+				var individual = [];
+				console.log('individual',typeof(individual));
 				for (var i=0; i< speakingStats.length; i++) {
 					individualX[i] = speakingStats[i].name;
 					individualY[i] = speakingStats[i].wordspaceTime;
 				}
 
+				for (var i=0; i<individualX.length; i++) {
+					individual.push([individualX[i],individualY[i]]);
+				}
+
+				console.log('individual',typeof(individual));
+
+
 				var genderX = ['Male', 'Female'];
 				var genderY = [0,0];
+				var gender = [];
 
 				for (var i=0; i< speakingStats.length; i++) {
 					if(speakingStats[i].gender=='m') {
@@ -75,8 +84,15 @@ router.get("/:sessionID", function (req, res, next) {
 					}
 				}
 
+				for (var i=0; i<genderX.length; i++) {
+					gender.push([genderX[i],genderY[i]]);
+				}
+
+				console.log('gender',gender);
+
 				var ethnicityX = [];
 				var ethnicityY = [];
+				var ethnicity = [];
 
 				for (var i=0; i< speakingStats.length; i++) {
 					var index = ethnicityX.indexOf(speakingStats[i].ethnicity);
@@ -91,16 +107,25 @@ router.get("/:sessionID", function (req, res, next) {
 					}
 				}
 
+				for (var i=0; i<ethnicityX.length; i++) {
+					ethnicity.push([ethnicityX[i],ethnicityY[i]]);
+				}
+
+				console.log('ethnicity',ethnicity);
+
 				res.render("analysis", {
 					sessionData: sessionData,
 					wordspaceData: wordspaceData,
 					meetingLength: wordspaceData.inputJSONData[0].body.job.duration,
-					individualX: individualX,
-					individualY: individualY,
-					genderX: genderX,
-					genderY: genderY,
-					ethnicityX: ethnicityX,
-					ethnicityY: ethnicityY
+					individual: individual,
+					gender: gender,
+					ethnicity: ethnicity
+					// individualX: individualX,
+					// individualY: individualY,
+					// genderX: genderX,
+					// genderY: genderY,
+					// ethnicityX: ethnicityX,
+					// ethnicityY: ethnicityY
 				});
 			});
 			// //put all analysis code here

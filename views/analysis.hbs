@@ -2,42 +2,27 @@
 
 <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <meta name="description" content="">
+	<meta name="description" content="">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link href="/stylesheets/sessions.css" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/sessions.css" rel="stylesheet" type="text/css">
 
-    <title>Record | Analysis</title>
+	<title>Record | Analysis</title>
 
-    <link rel="shortcut icon" type="image/png" href="/images/logo.svg">
-    
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
-    <script type="text/javascript">
-			
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
+	<link rel="shortcut icon" type="image/png" href="/images/logo.svg">
 
-        var data = google.visualization.arrayToDataTable([
-          ['Person', 'Percent spoken'],
-          ['Person 1',     33],
-          ['Person 2',      100],
-          ['Person 3',  51]
-        ]);
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-        var options = {
-          title: 'Percent Spoken'
-        };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
 
-        chart.draw(data, options);
-      }
-    </script>
+	<script type="text/javascript">
+    //   google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages':['corechart']});
+
+    // </script>
 
 </head>
 
@@ -46,53 +31,109 @@
 
 	<div id = "header">
 
-        <img id = "logo" src="/images/logo.svg" onclick="window.location='/sessions';"/>
-        <h1><span id="home" onclick="window.location='/sessions';">record</span><span id="page"> // meetings</span></h1>
+		<img id = "logo" src="/images/logo.svg" onclick="window.location='/sessions';"/>
+		<h1><span id="home" onclick="window.location='/sessions';">record</span><span id="page"> // meetings</span></h1>
 
-        <a href="/auth/logout" id="logout">logout</a>
-        <a href="/createSession" id="start">create</a>
-        <a href="/joinSession" id="join">join</a>
+		<a href="/auth/logout" id="logout">logout</a>
+		<a href="/createSession" id="start">create</a>
+		<a href="/joinSession" id="join">join</a>
+
+	</div> 
+
+	<script type="text/javascript">
+
+		// Load all the packages required by your charts in a single call to google.charts.load().
+
+		google.charts.setOnLoadCallback(drawIndividual);
+		google.charts.setOnLoadCallback(drawGender);
+		google.charts.setOnLoadCallback(drawEthnicity);
+
+
+		function drawIndividual() {
+
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Individual');
+			data.addColumn('number', 'Speaking Time');
+			data.addRows({{{toJSON individual}}});
+
+			var options = {
+				title: 'Percent Spoken Across Individuals'
+			};
+
+			var chart = new google.visualization.PieChart(document.getElementById('individual'));
+
+			chart.draw(data, options);
+		}
+
+		function drawGender() {
+
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Gender');
+			data.addColumn('number', 'Speaking Time');
+			data.addRows({{{toJSON gender}}});
+
+			var options = {
+				title: 'Percent Spoken Across Gender'
+			};
+
+			var chart = new google.visualization.PieChart(document.getElementById('gender'));
+
+			chart.draw(data, options);
+		}
+
+
+		function drawEthnicity() {
+
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Ethnicity');
+			data.addColumn('number', 'Speaking Time');
+			data.addRows({{{toJSON ethnicity}}});
+
+			var options = {
+				title: 'Percent Spoken Across Ethnicity'
+			};
+
+			var chart = new google.visualization.PieChart(document.getElementById('ethnicity'));
+
+			chart.draw(data, options);
+		}		
+	</script>
+
+{{!--     Individual <br>
+    {{toJSON individualX}} <br>
+    {{toJSON individualY}} <br> <br> <br>
+    Gender <br>
+    {{toJSON genderX}} <br>
+    {{toJSON genderY}} <br> <br> <br>
+    Ethnicity <br>
+    {{toJSON ethnicityX}} <br>
+    {{toJSON ethnicityY}} <br> --}}
+
+
+    <div id="table-container">
+
+    	<div id="individual" style="width: 30%; height: 200px; float: left;"></div>
+    	<div id="gender" style="width: 30%; height: 200px; float: left;"></div>
+    	<div id="ethnicity" style="width: 30%; height: 200px; float: left;"></div>
 
     </div>
-    
-<!--    sessionData <br>-->
+<br><br><br><br><br><br><br><br><br><br><br><br>
+    sessionData <br>
 
     {{!-- {{{toJSON sessionData}}} --}}
-    
-<!--		<br><br><br>-->
-		
-   {{!--         wordspaceData <br>
-   {{{toJSON wordspaceData}}} --}}
+    <br><br><br>
+{{!--         wordspaceData <br>
+	{{{toJSON wordspaceData}}} --}}
 
-<!--
-   Total Meeting Time: {{meetingLength}} seconds
+	Total Meeting Time: {{meetingLength}} seconds
 
-   <br><br>
-   
-   Individual <br>
-   {{toJSON individualX}} <br>
-   {{toJSON individualY}} <br> <br> <br>
-   
-   Gender <br>
-   {{toJSON genderX}} <br>
-   {{toJSON genderY}} <br> <br> <br>
-   
-   Ethnicity <br>
-   {{toJSON ethnicityX}} <br>
-   {{toJSON ethnicityY}} <br>
--->
+	<br><br>
+	{{toJSON individual}} <br>
+	{{toJSON gender}} <br>
+	{{toJSON ethnicity}} <br>
 
 
-	<div id="chart-container">
-		
-		<div class="piechart" id="piechart1"></div>
-		<div class="piechart" id="piechart2"></div>
-		<div class="piechart" id="piechart3"></div>
-		<div class="piechart" id="piechart4"></div>
-		
-		<div id="timeline"></div>
-		
-  </div>
+
 
 </body>
 
