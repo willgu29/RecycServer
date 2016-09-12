@@ -99,19 +99,45 @@
 		}
 
 		function drawTimeline() {
+			//console.log({{{toJSON sessionData}}})
+
 			var container = document.getElementById('timeline');
 			var chart = new google.visualization.Timeline(container);
 			var dataTable = new google.visualization.DataTable();
+			var sessionData = {{{toJSON sessionData}}};
 
-			dataTable.addColumn({ type: 'string', id: 'President' });
+			dataTable.addColumn({ type: 'string', id: 'Name' });
 			dataTable.addColumn({ type: 'number', id: 'Start' });
 			dataTable.addColumn({ type: 'number', id: 'End' });
-			dataTable.addRows([
-				[ 'Washington', 0, 2 ],
-				[ 'Washington', 3, 4 ],
-				[ 'Adams',      5, 6 ],
-				[ 'Jefferson',  0,  6 ]]
-			);
+			console.log('sessionData', sessionData);
+
+			// console.log('time is: ', typeof(parseFloat(sessionData[0].body.words[0].time)));
+			// console.log(parseFloat(sessionData[0].body.words[0].time + sessionData[0].body.words[0].duration));
+			console.log('yo');
+			var arr = [];//[[{type: 'string', id: 'Name'}, {type: 'number', id: 'Start'}, {type: 'number', id: 'End'}]];
+			for (var j=0; j<sessionData.length; j++) {
+				for (var i=0;i<sessionData[j].body.words.length;i++) {
+					var name = sessionData[j].user.name;
+					var start = parseFloat(sessionData[j].body.words[i].time)*1000;
+					var end = parseFloat(sessionData[j].body.words[i].time)*1000 + parseFloat(sessionData[j].body.words[i].duration)*1000;
+					arr.push([name, start, end]);
+				}				
+			}
+
+
+			console.log('arr', arr);
+
+			dataTable.addRows(arr);
+
+			// var dataTable = new google.visualization.arrayToDataTable(arr);
+
+			// dataTable.addRows([
+			// 	[ 'Washington', 0, 2 ],
+			// 	[ 'Washington', 3, 4 ],
+			// 	[ 'Adams',      5, 6 ],
+			// 	[ 'Jefferson',  0,  6 ]
+
+			// ]);
 
 			chart.draw(dataTable);
 		}
@@ -130,33 +156,38 @@
     {{toJSON ethnicityX}} <br>
     {{toJSON ethnicityY}} <br> --}}
 
+    <h1 style="text-align: center;">Here are the results of your meeting:</h1>
 
     <div id="table-container">
 
-    	<div id="individual" style="width: 30%; height: 200px; float: left;"></div>
-    	<div id="gender" style="width: 30%; height: 200px; float: left;"></div>
-    	<div id="ethnicity" style="width: 30%; height: 200px; float: left;"></div>
+    	<div id="individual" style="width: 32%; height: 200px; float: left;"></div>
+    	<div id="gender" style="width: 32%; height: 200px; float: left;"></div>
+    	<div id="ethnicity" style="width: 32%; height: 200px; float: left;"></div>
     	<div style="clear: both"></div> <br><br>
     	<div id="timeline" style="height: 180px;"></div>
 
     </div>
-<br><br><br><br><br><br><br><br><br><br><br><br>
-    sessionData <br>
+
+    <h1 style="text-align: center;">Total Meeting Time: {{meetingLength}} seconds</h1>
+    
+{{!-- <br><br><br><br><br><br><br><br><br><br><br><br> --}}
+    {{!-- sessionData <br> --}}
 
     {{!-- {{{toJSON sessionData}}} --}}
-    <br><br><br>
+{{!--     <br><br><br> --}}
 {{!--         wordspaceData <br>
 	{{{toJSON wordspaceData}}} --}}
 
-	Total Meeting Time: {{meetingLength}} seconds
+	
 
-	<br><br>
+{{!-- 	<br><br>
 	{{toJSON individual}} <br>
 	{{toJSON gender}} <br>
 	{{toJSON ethnicity}} <br>
 
 
 
+ --}}
 
 </body>
 
