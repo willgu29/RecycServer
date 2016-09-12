@@ -146,48 +146,24 @@
 
 	</script>
 
-{{!--     Individual <br>
-    {{toJSON individualX}} <br>
-    {{toJSON individualY}} <br> <br> <br>
-    Gender <br>
-    {{toJSON genderX}} <br>
-    {{toJSON genderY}} <br> <br> <br>
-    Ethnicity <br>
-    {{toJSON ethnicityX}} <br>
-    {{toJSON ethnicityY}} <br> --}}
+   	<div id="meeting">
+   	
+    	<h1>Meeting Analysis</h1>
+    	<p>Total Meeting Length: {{meetingLength}} seconds</p>
+    
+		</div>
+    
+    <div class="piechart" id="individual"></div>
 
-    <h1 style="text-align: center;">Here are the results of your meeting:</h1>
+    <div id="chart-container">
 
-    <div id="table-container">
-
-    	<div id="individual" style="width: 32%; height: 200px; float: left;"></div>
-    	<div id="gender" style="width: 32%; height: 200px; float: left;"></div>
-    	<div id="ethnicity" style="width: 32%; height: 200px; float: left;"></div>
-    	<div style="clear: both"></div> <br><br>
-    	<div id="timeline" style="height: 180px;"></div>
+    	<div class="piechart" id="gender"></div>
+    	<div id="separator"></div>
+    	<div class="piechart" id="ethnicity"></div>
 
     </div>
-
-    <h1 style="text-align: center;">Total Meeting Time: {{meetingLength}} seconds</h1>
     
-{{!-- <br><br><br><br><br><br><br><br><br><br><br><br> --}}
-    {{!-- sessionData <br> --}}
-
-    {{!-- {{{toJSON sessionData}}} --}}
-{{!--     <br><br><br> --}}
-{{!--         wordspaceData <br>
-	{{{toJSON wordspaceData}}} --}}
-
-	
-
-{{!-- 	<br><br>
-	{{toJSON individual}} <br>
-	{{toJSON gender}} <br>
-	{{toJSON ethnicity}} <br>
-
-
-
- --}}
+    <div id="timeline"></div>
 
 </body>
 
