@@ -52,7 +52,7 @@ router.post('/wordspace', function (req, res, next) {
 	  //var recordings = ['./analysis/adam_1_1.json', './analysis/tanuj_1_1.json', './analysis/will_1_1.json'];
     // console.log('recordings: ', recordings);
     console.log('yo');
-    console.log(typeof(recordings));
+    console.log(recordings);
     var data = wordspace(recordings);//session.recordingsData);
     console.log('after');
     //console.log('data: ', data);
