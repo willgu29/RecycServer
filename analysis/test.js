@@ -21,7 +21,16 @@ var wordSpace = function (recordingsData){
 	//access people's words by words[personNumber]
 
 	var numPeople = fileCont.length;
-	var totalLength = parseFloat(fileCont[0].job.duration); //Grab length of leader's clip
+	var maxLength = 0;
+	for (var i=0; i<fileCont.length; i++) {
+		if (fileCont[i].job.duration > maxLength) {
+			maxLength = fileCont[i].job.duration;
+		}
+	}
+	console.log('maxLength', maxLength)
+	var totalLength = parseFloat(maxLength); //Grab length of leader's clip
+
+	//var totalLength = parseFloat(fileCont[1].job.duration); //Grab length of leader's clip
 	var division = 1;
 	var partLen = totalLength/division;
 
@@ -68,6 +77,7 @@ var wordSpace = function (recordingsData){
 			}
 			//console.log(indvPart);
 			//add individual word contribution to part
+			//console.log('indv part is: ', indvPart)
 			indvPart.duration += wordDuration;
 			indvPart.wordConcat.push(wordText);
 			indvPart.confSum += wordConf;
